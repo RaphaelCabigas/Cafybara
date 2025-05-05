@@ -1,0 +1,52 @@
+@use "variables" as *;
+
+@mixin tablet() {
+  // ! Tablet Breakpoint
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  // ! Desktop Breakpoint
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin monitor() {
+  // ! Wide Breakpoint
+  @media (min-width: 2000px) {
+    @content;
+  }
+}
+
+$font-sizes: (
+  // * Font Sizes and Line Height Pairs
+  // Heading 1: font-size 72px, line-height 120%
+  h1: (4.5rem, 1.1),
+  // Heading 2: font-size 56px, line-height 120%
+  h2: (3.5rem, 1.2),
+  // Heading 3: font-size 48px, line-height 120%
+  h3: (3rem, 1.25),
+  // Heading 4: font-size 40px, line-height 140%
+  h4: (2.5rem, 1.3),
+  // Heading 5: font-size 32px, line-height 140%
+  h5: (2rem, 1.4),
+  // Heading 6: font-size 24px, line-height 140%
+  h6: (1.5rem, 1.4),
+  // Paragraph: font-size 18px, line-height 150%
+  p: (1.125rem, 1.5),
+  // Tags/Captions/Keywords: font-size 16px, line-height 150%
+  tag: (1rem, 1.5),
+  // Tiny Text: font-size 14px, line-height 160%
+  tiny: (0.875rem, 1.6)
+);
+
+@mixin fontSize($type) {
+  // ! Font Size Mixin
+  // ? $size: Map all the font-sizes with the desired type
+  $size: map-get($font-sizes, $type);
+  font-size: nth($size, 1);
+  line-height: nth($size, 2);
+}

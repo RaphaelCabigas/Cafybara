@@ -1,0 +1,33 @@
+// ! Z-Index
+$z-index-maxbot: -100;
+$z-index-bot: 0;
+$z-index-mid: 1;
+$z-index-top: 50;
+$z-index-maxtop: 100;
+
+// ! Border Width and Radius
+$border-xsmall: 0.03125rem; // 0.5px
+$border-small: 0.125rem; // 2px
+$border-medium: 0.25rem; // 4px
+$border-large: 0.5rem; // 8px
+$border-xlarge: 1rem; // 16px
+$border-xxlarge: 2rem; // 32px
+
+// ! Element Padding and Spacing
+$spacing-4: 0.25rem; // 4px
+$spacing-8: 0.5rem; // 8px
+$spacing-16: 1rem; // 16px
+$spacing-24: 1.5rem; // 24px
+$spacing-32: 2rem; // 32px
+$spacing-48: 3rem; // 48px
+$spacing-64: 4rem; // 64px
+
+// ! Section Top and Bottom Padding
+$section-block-small: 2.5rem; // 40px
+$section-block-medium: 5rem; // 80px
+$section-block-large: 7.5rem; //120px
+
+// ! Section Left and Right Padding
+$section-inline-small: 1.5rem; // 24px
+$section-inline-medium: 4rem; // 64px
+$section-inline-large: 6rem; // 96px
