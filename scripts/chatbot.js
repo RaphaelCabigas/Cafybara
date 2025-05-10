@@ -9,7 +9,7 @@
     }
 
     var MESSENGER_URL =
-        'scripts/script.js';
+        'scripts/main.js';
 
     var loadDfMessenger = function () {
         var elementScript = document.createElement('script');

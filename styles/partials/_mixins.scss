@@ -1,4 +1,4 @@
-@use "variables" as *;
+@use "./variables" as *;
 
 @mixin tablet() {
   // ! Tablet Breakpoint
@@ -10,13 +10,6 @@
 @mixin desktop() {
   // ! Desktop Breakpoint
   @media (min-width: 1024px) {
-    @content;
-  }
-}
-
-@mixin monitor() {
-  // ! Wide Breakpoint
-  @media (min-width: 2000px) {
     @content;
   }
 }
@@ -49,4 +42,20 @@ $font-sizes: (
   $size: map-get($font-sizes, $type);
   font-size: nth($size, 1);
   line-height: nth($size, 2);
+}
+
+@mixin widthWrap() {
+  .width-wrap {
+    // ? You may need to adjust the max-width depending on the design
+    // * Set the maximum width for the section's content
+    margin: 0 auto;
+    max-width: $max-width-wrap;
+    padding: $section-block-small $section-inline;
+    @include tablet() {
+      padding: $section-block-medium $section-inline;
+    }
+    @include desktop() {
+      padding: $section-block-large $section-inline;
+    }
+  }
 }

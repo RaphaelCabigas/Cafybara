@@ -1,0 +1,46 @@
+.width-wrap {
+  margin: 0 auto;
+  max-width: 1720px;
+  padding: 2.5rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .width-wrap {
+    padding: 5rem 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .width-wrap {
+    padding: 7.5rem 1.5rem;
+  }
+}
+
+.hero {
+  color: #443627;
+}
+.hero .width-wrap {
+  min-height: 100vh;
+}
+.hero .width-wrap h1 {
+  color: #fc8621;
+  font-size: 3.5rem;
+  line-height: 1.2;
+  font-weight: 900;
+  -webkit-text-stroke: 0.125rem #443627;
+}
+@media (min-width: 768px) {
+  .hero .width-wrap h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+  }
+}
+.hero .width-wrap p {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+@media (min-width: 768px) {
+  .hero .width-wrap p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}/*# sourceMappingURL=index.css.map */

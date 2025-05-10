@@ -1,3 +1,9 @@
+// ! Color Palette
+$brown: #443627;
+$orange: #fc8621;
+$peach: #f9e0ae;
+$black: #1b1a17;
+
 // ! Z-Index
 $z-index-maxbot: -100;
 $z-index-bot: 0;
@@ -28,6 +34,10 @@ $section-block-medium: 5rem; // 80px
 $section-block-large: 7.5rem; //120px
 
 // ! Section Left and Right Padding
-$section-inline-small: 1.5rem; // 24px
-$section-inline-medium: 4rem; // 64px
-$section-inline-large: 6rem; // 96px
+$section-inline: 1.5rem; // 24px
+
+$max-width-wrap: 1720px;
+
+// ! Hover Transition Timings
+
+$bounce: cubic-bezier(0.47, 1.64, 0.41, 0.8);

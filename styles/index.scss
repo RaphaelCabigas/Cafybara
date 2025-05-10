@@ -1,0 +1,29 @@
+@use "./partials/variables" as *;
+@use "./partials/mixins" as *;
+
+@include widthWrap();
+
+.hero {
+  color: $brown;
+  .width-wrap {
+    min-height: 100vh;
+
+    h1 {
+      color: $orange;
+      @include fontSize(h2);
+      font-weight: 900;
+      -webkit-text-stroke: $border-small $brown;
+      @include tablet() {
+        @include fontSize(h1);
+      }
+    }
+
+    p {
+      font-weight: 600;
+      @include fontSize(tiny);
+      @include tablet() {
+        @include fontSize(tag);
+      }
+    }
+  }
+}

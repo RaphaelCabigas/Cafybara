@@ -1,8 +1,134 @@
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruRegularOblique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: oblique;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruMediumOblique.ttf") format("truetype");
+  font-weight: 500;
+  font-style: oblique;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruBoldOblique.ttf") format("truetype");
+  font-weight: 700;
+  font-style: oblique;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruBlackOblique.ttf") format("truetype");
+  font-weight: 900;
+  font-style: oblique;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GT Maru";
+  src: url("../../assets/fonts/GTMaruLightOblique.ttf") format("truetype");
+  font-weight: 300;
+  font-style: oblique;
+}
+header {
+  margin: 0 auto;
+  max-width: 1720px;
+}
+header .width-wrap {
+  width: 100%;
+  padding: 0 1.5rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  z-index: 50;
+  pointer-events: none;
+}
+header .width-wrap * {
+  pointer-events: visible;
+}
+header .width-wrap .logo {
+  padding: 1rem;
+  color: #fc8621;
+  -webkit-text-stroke: 0.125rem #443627;
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+header .width-wrap .head-opts {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+header .width-wrap .head-opts li {
+  height: 100%;
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-opts li:last-child {
+    display: none;
+  }
+}
+header .width-wrap .head-opts li a,
+header .width-wrap .head-opts li button {
+  padding: 1rem;
+  padding-top: 1.5rem;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  color: #443627;
+  font-weight: 900;
+  transition: transform 0.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+header .width-wrap .head-opts li a:hover,
+header .width-wrap .head-opts li button:hover {
+  transform: translateY(16%);
+}
+header .width-wrap .head-opts li a::before,
+header .width-wrap .head-opts li button::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  transform: translateY(-16%);
+  background-color: #fc8621;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Outfit", sans-serif;
+  font-family: "GT Maru", sans-serif;
 }
 
 html {

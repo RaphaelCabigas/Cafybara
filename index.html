@@ -4,15 +4,72 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cafybara</title>
-        <script src="scripts/index.js"></script>
+        <title>Cafybara - Sip Coffee with Capybaras</title>
+        <meta name="title" content="Cafybara">
+        <meta property="description"
+            content="Unwind at Cafybara — a cozy spot where you can enjoy delicious coffee and relax with friendly capybaras. Perfect for relaxed vibes and good company.">
+        <meta property="og:url" content="https://cafybara.vercel.app">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Cafybara">
+        <meta property="og:description"
+            content="Visit Cafybara to enjoy handcrafted coffee while relaxing with adorable capybaras. A unique, serene café experience like no other.">
+        <meta property="og:image" content="./assets/images/thumbnail.jpg">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="cafybara.vercel.app">
+        <meta property="twitter:url" content="https://cafybara.vercel.app">
+        <meta name="twitter:title" content="Cafybara">
+        <meta property="twitter:description"
+            content="Chill out with capybaras and coffee at Cafybara. A peaceful café for calm and chill people.">
+        <meta name="twitter:image" content="./assets/images/thumbnail.jpg">
+        <meta property="twitter:image:width" content="1200">
+        <meta property="twitter:image:height" content="630">
+        <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+        <link rel="preload" href="./styles/style.css" as="style">
+        <link rel="preload" href="./scripts/chatbot.js" as="script">
+        <script src="./scripts/chatbot.js" async></script>
+        <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/index.css">
+        <style>
+            df-messenger {
+                /* Font color for the title in the titlebar. */
+                --df-messenger-button-titlebar-color: #443627;
+                /* Color for the chat dialog background. */
+                --df-messenger-chat-background-color: #f9e0ae;
+                --df-messenger-font-color: #1b1a17;
+                --df-messenger-send-icon: #fc8621;
+            }
+        </style>
     </head>
 
     <body>
+        <header>
+            <div class="width-wrap">
+                <a href="/" class="logo">
+                    Cafybara
+                </a>
+                <ul class="head-opts">
+                    <li> <a href="/" class="reservation">Reservation</a>
+                    </li>
+                    <li>
+                        <button class="menu-btn">
+                            Menu
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </header>
         <main>
-            <df-messenger intent="WELCOME" chat-title="Cafybara" agent-id="464c8f0d-6f4f-4746-9b6e-d67f936027fe"
-                language-code="en"></df-messenger>
+            <section class="hero">
+                <div class="width-wrap">
+                    <h1>Cafybara</h1>
+                    <p>Cafyn The Moment</p>
+                </div>
+            </section>
         </main>
+        <!-- <df-messenger intent="WELCOME" chat-title="Cafybara" agent-id="464c8f0d-6f4f-4746-9b6e-d67f936027fe"
+            language-code="en"></df-messenger> -->
     </body>
 
 </html>
