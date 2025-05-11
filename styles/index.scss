@@ -7,22 +7,54 @@
   color: $brown;
   .width-wrap {
     min-height: 100vh;
+    display: flex;
+    align-items: end;
 
-    h1 {
-      color: $orange;
-      @include fontSize(h2);
-      font-weight: 900;
-      -webkit-text-stroke: $border-small $brown;
+    .hero-heading {
+      width: 40%;
+      max-width: 480px;
+
+      h1 {
+        color: $orange;
+        @include fontSize(h2);
+        font-weight: 900;
+        -webkit-text-stroke: $border-small $brown;
+        display: none;
+      }
+
+      svg {
+        width: 100%;
+        height: fit-content;
+        min-width: 240px;
+      }
+
       @include tablet() {
         @include fontSize(h1);
       }
     }
 
     p {
-      font-weight: 600;
+      margin-bottom: $spacing-64 * 4;
+      font-weight: 500;
+      max-width: 30ch;
       @include fontSize(tiny);
+
+      span {
+        font-style: oblique;
+        font-weight: 800;
+      }
+
       @include tablet() {
+        margin-bottom: 24vw;
+        margin-left: $spacing-32;
         @include fontSize(tag);
+      }
+      @include desktop() {
+        margin-bottom: 22vw;
+        @include fontSize(p);
+      }
+      @include desktop-large() {
+        margin-bottom: 19vw;
       }
     }
   }

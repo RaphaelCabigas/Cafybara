@@ -58,11 +58,5 @@ $font-sizes: (
     margin: 0 auto;
     max-width: $max-width-wrap;
     padding: $section-block-small $section-inline;
-    @include tablet() {
-      padding: $section-block-medium $section-inline;
-    }
-    @include desktop() {
-      padding: $section-block-large $section-inline;
-    }
   }
 }

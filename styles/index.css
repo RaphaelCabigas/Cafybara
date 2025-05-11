@@ -21,44 +21,67 @@ Clotted Cream
   max-width: 1720px;
   padding: 2.5rem 1.5rem;
 }
-@media (min-width: 768px) {
-  .width-wrap {
-    padding: 5rem 1.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  .width-wrap {
-    padding: 7.5rem 1.5rem;
-  }
-}
 
 .hero {
   color: #443627;
 }
 .hero .width-wrap {
   min-height: 100vh;
+  display: flex;
+  align-items: end;
 }
-.hero .width-wrap h1 {
+.hero .width-wrap .hero-heading {
+  width: 40%;
+  max-width: 480px;
+}
+.hero .width-wrap .hero-heading h1 {
   color: #fc8621;
   font-size: 3.5rem;
   line-height: 1.2;
   font-weight: 900;
   -webkit-text-stroke: 0.125rem #443627;
+  display: none;
+}
+.hero .width-wrap .hero-heading svg {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-width: 240px;
 }
 @media (min-width: 768px) {
-  .hero .width-wrap h1 {
+  .hero .width-wrap .hero-heading {
     font-size: 4.5rem;
     line-height: 1.1;
   }
 }
 .hero .width-wrap p {
-  font-weight: 600;
+  margin-bottom: 16rem;
+  font-weight: 500;
+  max-width: 30ch;
   font-size: 0.875rem;
   line-height: 1.6;
 }
+.hero .width-wrap p span {
+  font-style: oblique;
+  font-weight: 800;
+}
 @media (min-width: 768px) {
   .hero .width-wrap p {
+    margin-bottom: 24vw;
+    margin-left: 2rem;
     font-size: 1rem;
     line-height: 1.5;
+  }
+}
+@media (min-width: 1024px) {
+  .hero .width-wrap p {
+    margin-bottom: 22vw;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 1440px) {
+  .hero .width-wrap p {
+    margin-bottom: 19vw;
   }
 }/*# sourceMappingURL=index.css.map */
