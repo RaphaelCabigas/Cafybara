@@ -12,11 +12,12 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: black white;
+  scrollbar-color: $orange $peach;
 }
 
 body {
-  background-color: white;
+  color: $black;
+  background-color: $peach;
   &.hide {
     overflow: hidden;
   }
@@ -66,5 +67,5 @@ button {
 }
 
 section {
-  background-color: white;
+  background-color: $peach;
 }

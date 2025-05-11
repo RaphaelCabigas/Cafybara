@@ -4,6 +4,25 @@ $orange: #fc8621;
 $peach: #f9e0ae;
 $black: #1b1a17;
 
+/*
+Copper
+#B87333
+TimberWolf
+#DBD7D2 
+Salmon
+#EA8D6D
+White
+#FFFFFF
+Fawn
+#CFAF7B
+Deep Coffee
+#724A2F
+Exotic Orange
+#F66435
+Clotted Cream
+#F3EFCA
+*/
+
 // ! Z-Index
 $z-index-maxbot: -100;
 $z-index-bot: 0;
@@ -17,7 +36,7 @@ $border-small: 0.125rem; // 2px
 $border-medium: 0.25rem; // 4px
 $border-large: 0.5rem; // 8px
 $border-xlarge: 1rem; // 16px
-$border-xxlarge: 2rem; // 32px
+$border-xxlarge: 1.5rem; // 24px
 
 // ! Element Padding and Spacing
 $spacing-4: 0.25rem; // 4px
@@ -27,6 +46,13 @@ $spacing-24: 1.5rem; // 24px
 $spacing-32: 2rem; // 32px
 $spacing-48: 3rem; // 48px
 $spacing-64: 4rem; // 64px
+
+// ! Clamp Spacings
+$clamp-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+$clamp-sm: clamp(0.5rem, 1vw, 1rem);
+$clamp-md: clamp(1rem, 2vw, 2rem);
+$clamp-lg: clamp(2rem, 4vw, 4rem);
+$clamp-xl: clamp(3rem, 6vw, 6rem);
 
 // ! Section Top and Bottom Padding
 $section-block-small: 2.5rem; // 40px
@@ -38,6 +64,5 @@ $section-inline: 1.5rem; // 24px
 
 $max-width-wrap: 1720px;
 
-// ! Hover Transition Timings
-
+// ! Hover Transitions
 $bounce: cubic-bezier(0.47, 1.64, 0.41, 0.8);

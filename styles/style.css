@@ -1,3 +1,21 @@
+/*
+Copper
+#B87333
+TimberWolf
+#DBD7D2 
+Salmon
+#EA8D6D
+White
+#FFFFFF
+Fawn
+#CFAF7B
+Deep Coffee
+#724A2F
+Exotic Orange
+#F66435
+Clotted Cream
+#F3EFCA
+*/
 @font-face {
   font-family: "GT Maru";
   src: url("../../assets/fonts/GTMaruRegular.ttf") format("truetype");
@@ -75,12 +93,111 @@ header .width-wrap * {
   pointer-events: visible;
 }
 header .width-wrap .logo {
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fc8621;
-  -webkit-text-stroke: 0.125rem #443627;
   font-weight: 900;
   font-size: 1.5rem;
   line-height: 1.4;
+}
+header .width-wrap .logo img {
+  width: 4rem;
+  margin-right: 0.5rem;
+}
+header .width-wrap .head-nav {
+  display: none;
+  position: fixed;
+  top: 4.8rem;
+  right: 1.5rem;
+}
+header .width-wrap .head-nav ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-nav ul {
+    padding: 0 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+header .width-wrap .head-nav ul li {
+  visibility: hidden;
+  opacity: 0;
+  height: 100%;
+}
+header .width-wrap .head-nav ul li a {
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  background-color: #f9e0ae;
+  color: #443627;
+  border-radius: 1rem;
+  border: 0.25rem solid #443627;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+header .width-wrap .head-nav ul li a span {
+  display: block;
+  transform: translateY(16%);
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-nav ul li a span {
+    transform: none;
+  }
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-nav ul li a {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+}
+@media (min-width: 1440px) {
+  header .width-wrap .head-nav ul li a {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 768px) {
+  header .width-wrap .head-nav ul li.reserve-nav-link {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-nav ul li {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@media (min-width: 768px) {
+  header .width-wrap .head-nav {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-nav {
+    position: static;
+  }
+}
+header .width-wrap .head-nav.show {
+  display: block;
+}
+header .width-wrap .head-nav.show li {
+  visibility: visible;
+  opacity: 1;
 }
 header .width-wrap .head-opts {
   display: flex;
@@ -90,38 +207,55 @@ header .width-wrap .head-opts {
 header .width-wrap .head-opts li {
   height: 100%;
 }
-@media (min-width: 1024px) {
-  header .width-wrap .head-opts li:last-child {
-    display: none;
-  }
-}
 header .width-wrap .head-opts li a,
 header .width-wrap .head-opts li button {
   padding: 1rem;
-  padding-top: 1.5rem;
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
   position: relative;
-  color: #443627;
+  color: #f9e0ae;
   font-weight: 900;
+  font-size: 1rem;
+  line-height: 1.5;
+  transform: translateY(16%);
   transition: transform 0.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
 }
 header .width-wrap .head-opts li a:hover,
 header .width-wrap .head-opts li button:hover {
-  transform: translateY(16%);
+  transform: translateY(32%);
 }
 header .width-wrap .head-opts li a::before,
 header .width-wrap .head-opts li button::before {
   content: "";
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 6rem;
   z-index: -100;
-  transform: translateY(-16%);
+  transform: translateY(-32%);
   background-color: #fc8621;
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+header .width-wrap .head-opts li button {
+  color: #443627;
+}
+header .width-wrap .head-opts li button::before {
+  border: 0.25rem solid #443627;
+  background-color: transparent;
+}
+header .width-wrap .head-opts li:first-child {
+  display: none;
+}
+@media (min-width: 768px) {
+  header .width-wrap .head-opts li:first-child {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  header .width-wrap .head-opts li:last-child {
+    display: none;
+  }
 }
 
 * {
@@ -133,11 +267,12 @@ header .width-wrap .head-opts li button::before {
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: black white;
+  scrollbar-color: #fc8621 #f9e0ae;
 }
 
 body {
-  background-color: white;
+  color: #1b1a17;
+  background-color: #f9e0ae;
 }
 body.hide {
   overflow: hidden;
@@ -189,5 +324,5 @@ button {
 }
 
 section {
-  background-color: white;
+  background-color: #f9e0ae;
 }/*# sourceMappingURL=style.css.map */
