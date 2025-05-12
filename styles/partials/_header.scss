@@ -52,6 +52,10 @@ header {
           gap: $spacing-24;
         }
 
+        @include desktop-large() {
+          gap: $spacing-32;
+        }
+
         li {
           visibility: hidden;
           opacity: 0;
@@ -126,8 +130,7 @@ header {
     .head-opts {
       display: flex;
       align-items: center;
-      gap: $spacing-16;
-
+      gap: $spacing-24;
       li {
         height: 100%;
 
@@ -161,11 +164,16 @@ header {
           }
         }
 
+        a::before {
+          @include boxShadow($darkorange);
+        }
+
         button {
           color: $brown;
           &::before {
             border: $border-medium solid $brown;
             background-color: $peach;
+            @include boxShadow($darkbrown);
           }
         }
 

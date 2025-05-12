@@ -1,0 +1,46 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+footer {
+  .width-wrap {
+    padding: $section-inline;
+    padding-bottom: $spacing-16;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $orange;
+    @include boxShadow($darkorange, true);
+    border-radius: $spacing-48 $spacing-48 0 0;
+    position: relative;
+
+    p {
+      @include fontSize(tiny);
+      text-align: center;
+      font-weight: 500;
+
+      @include tablet() {
+        @include fontSize(tag);
+      }
+
+      @include desktop() {
+        @include fontSize(p);
+      }
+    }
+
+    p a {
+      display: inline-block;
+      color: $peach;
+      border-radius: $border-xlarge;
+      text-decoration: underline $border-small;
+      font-weight: 900;
+      @include desktop() {
+        text-decoration-thickness: $border-medium;
+      }
+    }
+
+    @include tablet() {
+      border-radius: $section-block-small $section-block-small 0 0;
+    }
+  }
+}

@@ -137,6 +137,11 @@ header .width-wrap .head-nav ul {
     gap: 1.5rem;
   }
 }
+@media (min-width: 1440px) {
+  header .width-wrap .head-nav ul {
+    gap: 2rem;
+  }
+}
 header .width-wrap .head-nav ul li {
   visibility: hidden;
   opacity: 0;
@@ -212,7 +217,7 @@ header .width-wrap .head-nav.show li {
 header .width-wrap .head-opts {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 header .width-wrap .head-opts li {
   height: 100%;
@@ -247,12 +252,16 @@ header .width-wrap .head-opts li button::before {
   background-color: #fc8621;
   border-radius: 0 0 1.5rem 1.5rem;
 }
+header .width-wrap .head-opts li a::before {
+  box-shadow: 1px 2px 0 4px #d5711c;
+}
 header .width-wrap .head-opts li button {
   color: #443627;
 }
 header .width-wrap .head-opts li button::before {
   border: 0.25rem solid #443627;
   background-color: #f9e0ae;
+  box-shadow: 1px 2px 0 4px #221b13;
 }
 header .width-wrap .head-opts li:first-child {
   display: none;
@@ -265,6 +274,55 @@ header .width-wrap .head-opts li:first-child {
 @media (min-width: 1024px) {
   header .width-wrap .head-opts li:last-child {
     display: none;
+  }
+}
+
+footer .width-wrap {
+  padding: 1.5rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fc8621;
+  box-shadow: 1px -4px 0 4px #d5711c;
+  border-radius: 3rem 3rem 0 0;
+  position: relative;
+}
+footer .width-wrap p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+}
+@media (min-width: 768px) {
+  footer .width-wrap p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 1024px) {
+  footer .width-wrap p {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+}
+footer .width-wrap p a {
+  display: inline-block;
+  color: #f9e0ae;
+  border-radius: 1rem;
+  -webkit-text-decoration: underline 0.125rem;
+          text-decoration: underline 0.125rem;
+  font-weight: 900;
+}
+@media (min-width: 1024px) {
+  footer .width-wrap p a {
+    text-decoration-thickness: 0.25rem;
+  }
+}
+@media (min-width: 768px) {
+  footer .width-wrap {
+    border-radius: 2.5rem 2.5rem 0 0;
   }
 }
 

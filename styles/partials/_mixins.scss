@@ -60,3 +60,11 @@ $font-sizes: (
     padding: $section-block-small $section-inline;
   }
 }
+
+@mixin boxShadow($color, $reverse: false) {
+  @if ($reverse) {
+    box-shadow: 1px -4px 0 4px $color;
+  } @else {
+    box-shadow: 1px 2px 0 4px $color;
+  }
+}
