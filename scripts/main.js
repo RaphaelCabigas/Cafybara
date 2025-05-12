@@ -2667,7 +2667,7 @@ DF_MH.prototype.K = function () {
     var a = DF_Mr(DF_MAc, this.showErrorToast ? "show" : "", DF_MD(this.languageCode, "errorMessage")),
         b = DF_Mr(DF_MDc, "df-message-list", this.messages.map(function (e) {
             return DF_Mr(DF_MBc, e.element)
-        }), this.showBotWriting ? DF_Mr(DF_MCc, "..", !0, "agentTyping") : null);
+        }), this.showBotWriting ? DF_Mr(DF_MCc, "⌨ Cafybara is Typing...", !0, "agentTyping") : null);
     if (!this.minimized) return DF_Mr(DF_MEc, a, b);
     var c = DF_MD(this.languageCode, "minimizeAriaLabel"),
         d = DF_MD(this.languageCode, "maximize");
