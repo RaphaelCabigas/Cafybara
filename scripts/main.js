@@ -3997,7 +3997,8 @@ DF_MIe.prototype.j = function (a, b) {
 };
 var DF_MJe = DF_Mxe(DF_MIe);
 var DF_MKe = DF_Mg([' <style>\n        @import url(//fonts.googleapis.com/icon?family=Material+Icons);\n      </style>\n      <div class="df-button-icon">\n        <span\n          aria-hidden="true"\n          class="material-icons"\n          id="materialButtonIcon"\n          style=', ">\n          ", "\n        </span>\n      </div>"]),
-    DF_MLe = DF_Mg('<a\n        href=";"\n        class="focus-outline"\n        target="_blank"\n        rel="noopener noreferrer"\n        id="dfButtonAnchorWrapper"\n        @click=";">\n        ;\n        <span class="text"> ; </span>\n        <span class="visually-hidden"> ; </span>\n      </a>'.split(";")),
+    // ! Target = "_blank" removed
+    DF_MLe = DF_Mg('<a\n        href=";"\n        class="focus-outline"\n        \n        rel="noopener noreferrer"\n        id="dfButtonAnchorWrapper"\n        @click=";">\n        ;\n        <span class="text"> ; </span>\n        <span class="visually-hidden"> ; </span>\n      </a>'.split(";")),
     DF_MMe = DF_Mg(['<button\n        class="focus-outline"\n        id="dfButtonWrapper"\n        @click="', '">\n        ', '\n        <span class="text"> ', " </span>\n      </button> "]);
 
 function DF_MW() {
@@ -4100,7 +4101,8 @@ DF_Mk([DF_MA(), DF_Ml("design:type", String)], DF_MPe.prototype, "classes", void
 DF_MPe = DF_Mk([DF_Mz("df-card")], DF_MPe);
 var DF_MQe = DF_Mw([".df-chips-wrapper{padding:10px}.df-chips-wrapper.clicked{display:none}.df-chips-wrapper .chip{align-items:center;background-color:var(--df-messenger-chip-color);background-color:#fff;border-color:var(--df-messenger-chip-border-color);border-radius:16px;border: 1.5px solid var(--df-messenger-font-color);display:inline-flex;height:35px;margin:0 10px 10px 0;padding:0 16px;transition: box-shadow 0.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);}.df-chips-wrapper a,button{background-color:transparent;border:none;color:var(--df-messenger-font-color);cursor:pointer;display:inline-flex;font-family: GT Maru, sans-serif;font-size:14px;text-decoration:none;vertical-align:bottom}.df-chips-wrapper .chip:hover{box-shadow: 0 4px 0px 0 rgba(0, 0, 0, .24);}.df-chips-wrapper .chip img{margin-right:8px;max-height:17.5px;max-width:17.5px}.df-chips-wrapper a[href]:after{background:50%/contain no-repeat url(\"data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' fill='black' height='24' viewBox='0 0 24 24' width='24'> <path d='M0 0h24v24H0z' fill='none'/> <path d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/> </svg>\");content:\"\";display:inline-block;height:15px;margin-left:8px;width:15px}"]);
 var DF_MRe = DF_Mg([' <img src="', '" aria-hidden="true" /> ']),
-    DF_MSe = DF_Mg('\n          <span role="listitem" class="chip">\n            <a\n              @click=;\n              class="chip-link focus-outline-round"\n              href=";"\n              target="_blank"\n              rel="noopener noreferrer">\n              ; ;\n              <span class="visually-hidden">;</span>\n            </a>\n          </span>\n        '.split(";")),
+    // ! Target = "_blank" removed
+    DF_MSe = DF_Mg('\n          <span role="listitem" class="chip">\n            <a\n              @click=;\n              class="chip-link focus-outline-round"\n              href=";"\n              \n              rel="noopener noreferrer">\n              ; ;\n              <span class="visually-hidden">;</span>\n            </a>\n          </span>\n        '.split(";")),
     DF_MTe = DF_Mg(['\n          <span role="listitem" class="chip">\n            <button\n              class="focus-outline-round"\n              @click=',
         ">\n              ", " ", "\n            </button>\n          </span>\n        "
     ]),
@@ -4295,7 +4297,8 @@ var DF_M$e = DF_Mg([' <img class="image" style=', " /> "]),
     DF_Maf = DF_Mg([' <h3 class="title"> ', " </h3> "]),
     DF_Mbf = DF_Mg([' <div class="subtitle"> ', " </div> "]),
     DF_Mcf = DF_Mg(["\n      ", '\n      <div class="text-container"> ', " ", " </div>\n    "]),
-    DF_Mdf = DF_Mg(' <a\n        @click=";"\n        class="; focus-outline"\n        target="_blank"\n        href=";"\n        rel="noopener noreferrer">\n        <div class="title-card-elements">\n          ;\n          <span class="visually-hidden"> ; </span>\n        </div>\n      </a>'.split(";")),
+    // ! Target = "_blank" removed
+    DF_Mdf = DF_Mg(' <a\n        @click=";"\n        class="; focus-outline"\n        \n        href=";"\n        rel="noopener noreferrer">\n        <div class="title-card-elements">\n          ;\n          <span class="visually-hidden"> ; </span>\n        </div>\n      </a>'.split(";")),
     DF_Mef = DF_Mg([' <div class="title-card-elements"> ', " </div>"]);
 
 function DF_M2() {
