@@ -261,7 +261,7 @@ header .width-wrap .head-opts li button {
 header .width-wrap .head-opts li button::before {
   border: 0.25rem solid #443627;
   background-color: #f9e0ae;
-  box-shadow: 1px 2px 0 4px #221b13;
+  box-shadow: 1px 2px 0 4px #2c2318;
 }
 header .width-wrap .head-opts li:first-child {
   display: none;
