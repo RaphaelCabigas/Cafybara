@@ -51,6 +51,15 @@ Clotted Cream
   height: fit-content;
   min-width: 240px;
 }
+.hero .width-wrap .hero-heading .hero-socials {
+  display: none;
+}
+@media (min-width: 768px) {
+  .hero .width-wrap .hero-heading .hero-socials {
+    height: 3rem;
+    display: flex;
+  }
+}
 @media (min-width: 768px) {
   .hero .width-wrap .hero-heading {
     font-size: 4.5rem;

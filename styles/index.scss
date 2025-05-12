@@ -16,7 +16,6 @@
       width: 40%;
       max-width: 480px;
       z-index: $z-index-mid;
-
       h1 {
         color: $orange;
         @include fontSize(h2);
@@ -24,11 +23,18 @@
         -webkit-text-stroke: $border-small $brown;
         display: none;
       }
-
       svg {
         width: 100%;
         height: fit-content;
         min-width: 240px;
+      }
+
+      .hero-socials {
+        display: none;
+        @include tablet() {
+          height: $spacing-48;
+          display: flex;
+        }
       }
 
       @include tablet() {

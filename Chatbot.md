@@ -14,6 +14,7 @@ All styles and html have been changed through the main.js file
 - ### #sendIcon:hover - fill: green;
 - ### .input-box-wrapper - border-top: 2.5px solid #fff;
 - ### img - border-radius: 10px 10px 24px 24px;
+- ### button#widgetIcon - border-radius: 50%;
 
 ## Added Styles
 
@@ -24,6 +25,7 @@ All styles and html have been changed through the main.js file
 - ### .chat-min - background-color: var(--df-messenger-button-titlebar-color);
 - ### button#widgetIcon:hover{transform: scale(1.2);}
 - ### button#widgetIcon - transform 0.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+- ### .chat-wrapper.chat-open - border: 3px solid var(--df-messenger-button-titlebar-color);
 
 ## Chatbot HTML
 
