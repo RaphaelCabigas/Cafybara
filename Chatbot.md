@@ -16,7 +16,7 @@ All styles and html have been changed through the main.js file
 - ### img - border-radius: 10px 10px 24px 24px;
 - ### button#widgetIcon - border-radius: 50%;
 - ### #descriptionWrapper - border-radius: 8px;
-- ### .image - margin-right: 24px; max-height: 24px; max-width: 24px;
+- ### .image - margin-right: 24px; max-height: 24px; max-width: 24px; background-size: 32px; padding-right: 24px;
 
 ## Added Styles
 
@@ -25,12 +25,14 @@ All styles and html have been changed through the main.js file
 - ### .message-list-wrapper.minimized - border-radius: 24px;
 - ### .chat-min df-message-list - background-color: transparent;
 - ### .chat-min - background-color: var(--df-messenger-button-titlebar-color);
-- ### button#widgetIcon:hover{transform: scale(1.2);}
 - ### button#widgetIcon - transform 0.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
 - ### .chat-wrapper.chat-open - border: 3px solid var(--df-messenger-button-titlebar-color);
 - ### "#dfButtonAnchorWrapper,#dfButtonWrapper - padding-left: 14px;
 - ### .description-line - line-height: 1.4;
 - ### .image - background-position: center; height: 32px;
+
+- ### button#widgetIcon:hover{transform: scale(1.2);}
+- ### .text-container{display: flex; flex-direction: column; gap: 8px;}
 
 ## Chatbot HTML
 
