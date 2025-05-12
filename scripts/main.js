@@ -3967,7 +3967,7 @@ DF_Mk([DF_MA({
 DF_Mk([DF_MB(), DF_Ml("design:type", Boolean)], DF_MV.prototype, "ua", void 0);
 DF_Mk([DF_MB(), DF_Ml("design:type", Object)], DF_MV.prototype, "ca", void 0);
 DF_MV = DF_Mk([DF_Mz("df-accordion")], DF_MV);
-var DF_MGe = DF_Mw(["#dfButtonAnchorWrapper,#dfButtonWrapper{align-items:center;background:#fff;border-radius:8px;box-sizing:border-box;color:#000;cursor:pointer;display:flex;font-family: GT Maru, sans-serif;font-size:14px;padding:12px;text-decoration:none;width:100%}#dfButtonAnchorWrapper:hover>#dfLinkText,#dfButtonAnchorWrapper:hover>.df-button-icon,#dfButtonWrapper:hover>#dfButtonText,#dfButtonWrapper:hover>.df-button-icon{opacity:.5}.text{padding-left:12px}.df-button-icon,.df-button-icon #materialButtonIcon,.df-button-icon #materialIcon{height:24px;width:24px}button#dfButtonWrapper{background:none;border:none}a#dfButtonAnchorWrapper:focus-visible,button#dfButtonWrapper:focus-visible{outline:none;position:relative}"]);
+var DF_MGe = DF_Mw(["#dfButtonAnchorWrapper,#dfButtonWrapper{align-items:center;background:#fff;border-radius:8px;box-sizing:border-box;color:#000;cursor:pointer;display:flex;font-family: GT Maru, sans-serif;font-size:14px;padding:12px;padding-left:14px;text-decoration:none;width:100%}#dfButtonAnchorWrapper:hover>#dfLinkText,#dfButtonAnchorWrapper:hover>.df-button-icon,#dfButtonWrapper:hover>#dfButtonText,#dfButtonWrapper:hover>.df-button-icon{opacity:.5}.text{padding-left:12px}.df-button-icon,.df-button-icon #materialButtonIcon,.df-button-icon #materialIcon{height:24px;width:24px}button#dfButtonWrapper{background:none;border:none}a#dfButtonAnchorWrapper:focus-visible,button#dfButtonWrapper:focus-visible{outline:none;position:relative}"]);
 var DF_MHe = window;
 /*
 
@@ -4175,7 +4175,7 @@ DF_Mk([DF_MA({
 }), DF_Ml("design:type", Array)], DF_MXe.prototype, "chips", void 0);
 DF_Mk([DF_MB(), DF_Ml("design:type", Boolean)], DF_MXe.prototype, "La", void 0);
 DF_MXe = DF_Mk([DF_Mz("df-chips")], DF_MXe);
-var DF_MYe = DF_Mw([".description-line{color:rgba(0,0,0,.87);font-size:14px;padding-top:8px;word-break:break-word}#descriptionWrapper{background-color:#fff;border-radius:8px;display:flex;flex-direction:column;font-family: GT Maru, sans-serif;padding:16px}.title{color:var(--df-messenger-font-color);font-size:14px;font-weight:700;margin:0}"]);
+var DF_MYe = DF_Mw([".description-line{line-height:1.4;color:rgba(0,0,0,.87);font-size:14px;padding-top:8px;word-break:break-word}#descriptionWrapper{background-color:#fff;border-radius:16px;display:flex;flex-direction:column;font-family: GT Maru, sans-serif;padding:16px}.title{color:var(--df-messenger-font-color);font-size:14px;font-weight:700;margin:0}"]);
 var DF_MZe = DF_Mg(['<h3 class="title"> ', " </h3>"]),
     DF_M_e = DF_Mg(['<div class="description-line"> ', " </div>"]),
     DF_M0e = DF_Mg([' <div id="', '"> ', " ", " </div> "]);
@@ -4289,8 +4289,8 @@ DF_Mk([DF_MA(), DF_Ml("design:type", String)], DF_M7e.prototype, "source", void 
 DF_Mk([DF_MA(), DF_Ml("design:type", String)], DF_M7e.prototype, "accessibilityText", void 0);
 DF_Mk([DF_MB(), DF_Ml("design:type", Boolean)], DF_M7e.prototype, "Na", void 0);
 DF_M7e = DF_Mk([DF_Mz("df-image"), DF_Ml("design:paramtypes", [])], DF_M7e);
-var DF_M8e = DF_Mw([".image{background-repeat:no-repeat;background-size:contain;margin-right:24px;max-height:24px;max-width:24px;padding-right:24px}.title{color:var(--df-messenger-font-color);font-family: GT Maru, sans-serif;font-size:14px;font-weight:700;margin:0}.subtitle{color:#757575;padding-top:8px;line-height:1.5;}.title-card-elements{background-color:#fff;background-size:100% 1px;border-radius:16px;cursor:pointer;display:flex;font-family: GT Maru, sans-serif;font-size:14px;padding:16px}.list-button{background-color:transparent;border:none;padding:0;width:100%}button{text-align:left}"]);
-var DF_M9e = DF_Mw([".image{background-repeat:no-repeat;background-size:contain;margin-right:24px;max-height:24px;max-width:24px;padding-right:24px}.link-wrapper{text-decoration:none}.title{color:var(--df-messenger-font-color);font-weight:700}.subtitle{color:#757575;padding-top:8px;line-height:1.5;}.title-card-elements{background-color:#fff;border-radius:16px;display:flex;padding:16px}.title,.title-card-elements{font-family: GT Maru, sans-serif;font-size:14px}.title{margin:0}"]);
+var DF_M8e = DF_Mw([".image{height:32px;background-position:center;background-repeat:no-repeat;background-size:contain;margin-right:18px;max-height:32px;max-width:32px;padding-right:24px}.title{color:var(--df-messenger-font-color);font-family: GT Maru, sans-serif;font-size:14px;font-weight:700;margin:0}.subtitle{color:#757575;padding-top:8px;line-height:1.5;}.title-card-elements{background-color:#fff;background-size:100% 1px;border-radius:16px;cursor:pointer;display:flex;font-family: GT Maru, sans-serif;font-size:14px;padding:16px}.list-button{background-color:transparent;border:none;padding:0;width:100%}button{text-align:left}"]);
+var DF_M9e = DF_Mw([".image{height:32px;background-position:center;background-repeat:no-repeat;background-size:contain;margin-right:18px;max-height:32px;max-width:32px;padding-right:24px}.link-wrapper{text-decoration:none}.title{color:var(--df-messenger-font-color);font-weight:700}.subtitle{color:#757575;padding-top:8px;line-height:1.4;}.title-card-elements{background-color:#fff;border-radius:16px;display:flex;padding:16px}.title,.title-card-elements{font-family: GT Maru, sans-serif;font-size:14px}.title{margin:0}"]);
 var DF_M$e = DF_Mg([' <img class="image" style=', " /> "]),
     DF_Maf = DF_Mg([' <h3 class="title"> ', " </h3> "]),
     DF_Mbf = DF_Mg([' <div class="subtitle"> ', " </div> "]),
