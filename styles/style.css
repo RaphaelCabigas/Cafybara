@@ -252,7 +252,7 @@ header .width-wrap .head-opts li button {
 }
 header .width-wrap .head-opts li button::before {
   border: 0.25rem solid #443627;
-  background-color: transparent;
+  background-color: #f9e0ae;
 }
 header .width-wrap .head-opts li:first-child {
   display: none;

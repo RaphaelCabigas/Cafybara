@@ -165,7 +165,7 @@ header {
           color: $brown;
           &::before {
             border: $border-medium solid $brown;
-            background-color: transparent;
+            background-color: $peach;
           }
         }
 

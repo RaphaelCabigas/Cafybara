@@ -9,10 +9,13 @@
     min-height: 100vh;
     display: flex;
     align-items: end;
+    position: relative;
+    overflow: hidden;
 
     .hero-heading {
       width: 40%;
       max-width: 480px;
+      z-index: $z-index-mid;
 
       h1 {
         color: $orange;
@@ -35,9 +38,10 @@
 
     p {
       margin-bottom: $spacing-64 * 4;
-      font-weight: 500;
       max-width: 30ch;
       @include fontSize(tiny);
+      font-weight: 500;
+      z-index: $z-index-mid;
 
       span {
         font-style: oblique;
@@ -55,6 +59,32 @@
       }
       @include desktop-large() {
         margin-bottom: 19vw;
+      }
+    }
+
+    .hero-img {
+      position: absolute;
+      width: 100%;
+      max-width: 560px;
+      left: -20%;
+      top: 72px;
+      opacity: 0.3;
+      transform: scaleX(-1);
+
+      @include tablet() {
+        height: 100%;
+        width: 60%;
+        max-width: 720px;
+        left: auto;
+        right: -10%;
+        top: 30px;
+        transform: none;
+      }
+
+      @include desktop() {
+        height: 120%;
+        max-width: 760px;
+        top: -30px;
       }
     }
   }

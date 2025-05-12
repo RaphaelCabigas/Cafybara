@@ -42,6 +42,8 @@
                 --df-messenger-chat-background-color: #f9e0ae;
                 --df-messenger-font-color: #1b1a17;
                 --df-messenger-send-icon: #fc8621;
+                --df-messenger-user-message: #fc8621;
+                --df-messenger-bot-message: #ffffff;
             }
         </style>
     </head>
@@ -168,6 +170,7 @@
                             </defs>
                         </svg>
                     </div>
+                    <img class="hero-img" src="./assets/images/hero-img.png" alt="A chilling capybara">
                     <p>
                         Cafybara <span>[ Ca-fy-ba-ra ]</span> a cozy café inspired by capybaras, serving great coffee,
                         tasty treats,
@@ -176,6 +179,7 @@
                 </div>
             </section>
         </main>
+        <!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script> -->
         <df-messenger chat-icon="https:&#x2F;&#x2F;cafybara.vercel.app&#x2F;assets&#x2F;icons&#x2F;chat-icon.png"
             intent="WELCOME" chat-title="Cafybara" agent-id="464c8f0d-6f4f-4746-9b6e-d67f936027fe"
             language-code="en"></df-messenger>

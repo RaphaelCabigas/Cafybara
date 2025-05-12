@@ -29,10 +29,13 @@ Clotted Cream
   min-height: 100vh;
   display: flex;
   align-items: end;
+  position: relative;
+  overflow: hidden;
 }
 .hero .width-wrap .hero-heading {
   width: 40%;
   max-width: 480px;
+  z-index: 1;
 }
 .hero .width-wrap .hero-heading h1 {
   color: #fc8621;
@@ -56,10 +59,11 @@ Clotted Cream
 }
 .hero .width-wrap p {
   margin-bottom: 16rem;
-  font-weight: 500;
   max-width: 30ch;
   font-size: 0.875rem;
   line-height: 1.6;
+  font-weight: 500;
+  z-index: 1;
 }
 .hero .width-wrap p span {
   font-style: oblique;
@@ -83,5 +87,32 @@ Clotted Cream
 @media (min-width: 1440px) {
   .hero .width-wrap p {
     margin-bottom: 19vw;
+  }
+}
+.hero .width-wrap .hero-img {
+  position: absolute;
+  width: 100%;
+  max-width: 560px;
+  left: -20%;
+  top: 72px;
+  opacity: 0.3;
+  transform: scaleX(-1);
+}
+@media (min-width: 768px) {
+  .hero .width-wrap .hero-img {
+    height: 100%;
+    width: 60%;
+    max-width: 720px;
+    left: auto;
+    right: -10%;
+    top: 30px;
+    transform: none;
+  }
+}
+@media (min-width: 1024px) {
+  .hero .width-wrap .hero-img {
+    height: 120%;
+    max-width: 760px;
+    top: -30px;
   }
 }/*# sourceMappingURL=index.css.map */
