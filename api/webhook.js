@@ -84,7 +84,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `Reservation Confirmation`,
-            subtitle: "Kindly confirm that your reservation will be on:"
+            subtitle: "Kindly confirm that your reservation."
           },
           {
             type: "divider"
@@ -100,14 +100,14 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `Email:`,
-            subtitle: ` ${email}`
+            subtitle: `${email}`
           },
           {
             type: "divider"
           },
           {
             type: "info",
-            title: `Date & Time::`,
+            title: `Date & Time:`,
             subtitle: `${formattedDate} & ${allowedTime}`
           },
           {
@@ -119,12 +119,12 @@ export default async function handler(req, res) {
             subtitle: `${allowedGuest}`
           },
           {
-            type: "description",
-            title: `Price per Guest & Total Price:`,
-            text: [`${priceRaw}`, `${totalPrice}`]
+            type: "divider"
           },
           {
-            type: "divider"
+            type: "description",
+            title: `Total Price (per Guest):`,
+            subtitle: `${totalPrice} AED (${priceRaw} AED)`
           },
           {
             type: "chips",
