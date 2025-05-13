@@ -37,3 +37,4 @@ All styles and html have been changed through the main.js file
 ## Chatbot HTML
 
 - Changed SVG Send Icon (#sendIcon)
+- Added div with class titlebar-ctr and a img chat-titlebar-icon in the .titlebar-wrapper with styling
