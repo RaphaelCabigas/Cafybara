@@ -1,13 +1,22 @@
 export default async function handler(req, res) {
+  // * Only allow post request
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // * Extract the request and the corresponding intent name
   const body = req.body;
   const intentName = body.queryResult.intent.displayName;
 
-  if (intentName === 'Booking Reservation') {
+  console.log(intentName);
+
+  let payload = {};
+
+  if (intentName === 'BookingReservation') {
+    // * Extract all the parameters used in the intent or just an empty object
     const params = body.queryResult?.parameters || {};
+
+    // * Assign the corresponding parameters used
     const name = params['given-name'];
     const email = params['email'];
     const allowedTime = params['allowed-time'];
@@ -16,17 +25,20 @@ export default async function handler(req, res) {
 
     let formattedDate = '';
     try {
+      // * Make a new Date object and change the format e.g. May 16, 2025
       const dateObj = new Date(dateRaw);
       formattedDate = dateObj.toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric'
       });
+
+      // * Any errors occur, get the raw date
     } catch (err) {
       formattedDate = dateRaw;
     }
 
-    const payload = {
+    payload = {
       richContent: [
         [
           {
@@ -51,6 +63,7 @@ export default async function handler(req, res) {
     };
   }
 
+  // * Return successful payload
   return res.status(200).json({
     fulfillmentMessages: [
       {
