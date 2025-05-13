@@ -8,13 +8,13 @@ export default async function handler(req, res) {
   const body = req.body;
   const intentName = body.queryResult.intent.displayName;
 
-  console.log(intentName);
-
   let payload = {};
 
   if (intentName === 'BookingReservation') {
     // * Extract all the parameters used in the intent or just an empty object
     const params = body.queryResult?.parameters || {};
+
+    console.log(params);
 
     // * Assign the corresponding parameters used
     const name = params['given-name'];
