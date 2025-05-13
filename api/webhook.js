@@ -9,26 +9,20 @@ export default async function handler(req, res) {
   const intentName = body.queryResult.intent.displayName;
 
   let payload = {};
+
   if (intentName === 'ReservationPricing') {
-    // * Extract all the parameters used in the context or just an empty object
-    const contexts = body.queryResult?.outputContexts || [];
-    const continueContext = contexts.find(ctx =>
-      ctx.name.endsWith('/contexts/continue-reservation-followup')
-    );
-
-    // * Get the parameters from that context
-    const name = continueContext?.parameters?.['given-name'];
-    const email = continueContext?.parameters?.['email'];
-    const allowedTime = continueContext?.parameters?.['allowed-time'];
-    const allowedGuest = continueContext?.parameters?.['allowed-guests'];
-    const dateRaw = continueContext?.parameters?.['date'];
-
     // * Extract all the parameters used in the intent or just an empty object
     const params = body.queryResult?.parameters || {};
-    const priceRaw = params["reservation-item"];
+
+    // * Assign the corresponding parameters used
+    const name = params['given-name'];
+    const email = params['email'];
+    const allowedTime = params['allowed-time'];
+    const allowedGuest = params['allowed-guests'];
+    const dateRaw = params['date'];
+    const priceRaw = params['reservation-item'];
 
     let formattedDate = '';
-
     try {
       // * Make a new Date object and change the format e.g. May 16, 2025
       const dateObj = new Date(dateRaw);
