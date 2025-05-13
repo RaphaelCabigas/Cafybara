@@ -1,0 +1,13 @@
+{
+  "name": "cafybara",
+  "version": "1.0.0",
+  "description": "A vanilla Node.js webhook for Dialogflow CX/ES",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  }
+}
