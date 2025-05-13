@@ -22,6 +22,7 @@ export default async function handler(req, res) {
     const allowedTime = params['allowed-time'];
     const allowedGuest = params['allowed-guests'];
     const dateRaw = params['date'];
+    const priceRaw = params['reservation-item'];
 
     let formattedDate = '';
     try {
@@ -38,6 +39,40 @@ export default async function handler(req, res) {
       formattedDate = dateRaw;
     }
 
+    if (!params['reservation-item']) {
+      return res.status(200).json({
+        fulfillmentMessages: [
+          {
+            payload: {
+              richContent: [
+                [
+                  {
+                    type: "info",
+                    title: "Reservation Duration",
+                    subtitle: "How long would you like to reserve a spot at Cafybara?"
+                  },
+                  {
+                    type: "info",
+                    subtitle: "Note: Pricing is per guest based on the duration selected."
+                  },
+                  {
+                    type: "chips",
+                    options: [
+                      { text: "30 minutes - 35 AED" },
+                      { text: "1 hour - 60 AED" },
+                      { text: "1 hour 30 minutes - 80 AED" }
+                    ]
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      });
+    }
+
+    const totalPrice = priceRaw * allowedGuest;
+
     payload = {
       richContent: [
         [
@@ -47,17 +82,49 @@ export default async function handler(req, res) {
             accessibilityText: "Capybara waiting for a table"
           },
           {
-            type: "description",
+            type: "info",
             title: `Reservation Confirmation`,
-            text: [`Name: ${name}`, `Email: ${email}`]
+            subtitle: "Kindly confirm that your reservation will be on:"
           },
           {
-            "type": "divider"
+            type: "divider"
           },
           {
             type: "info",
-            title: `Kindly confirm that your reservation will be on:`,
-            subtitle: `${formattedDate}, ${allowedTime}, with ${allowedGuest} guest/s.`
+            title: `Name:`,
+            subtitle: `${name}`
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "info",
+            title: `Email:`,
+            subtitle: ` ${email}`
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "info",
+            title: `Date & Time::`,
+            subtitle: `${formattedDate} & ${allowedTime}`
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "info",
+            title: `Guest/s:`,
+            subtitle: `${allowedGuest}`
+          },
+          {
+            type: "description",
+            title: `Price per Guest & Total Price:`,
+            text: [`${priceRaw}`, `${totalPrice}`]
+          },
+          {
+            type: "divider"
           },
           {
             type: "chips",
@@ -68,7 +135,7 @@ export default async function handler(req, res) {
                   src: {
                     rawUrl: "https://api.iconify.design/lets-icons/check-fill.svg?height=16&color=%235cb338"
                   }
-                },
+                }
               },
               {
                 text: "Cancel",
@@ -76,7 +143,7 @@ export default async function handler(req, res) {
                   src: {
                     rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
                   }
-                },
+                }
               }
             ]
           }
