@@ -66,7 +66,7 @@ export default async function handler(req, res) {
                 text: "Confirm",
                 image: {
                   src: {
-                    rawUrl: "https://api.iconify.design/material-symbols/check-box-rounded.svg?height=16&color=%235cb338"
+                    rawUrl: "https://api.iconify.design/lets-icons/check-fill.svg?height=16&color=%235cb338"
                   }
                 },
               },
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
                 text: "Cancel",
                 image: {
                   src: {
-                    rawUrl: "https://api.iconify.design/mynaui/letter-x-square-solid.svg?height=16&color=%23e52121"
+                    rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
                   }
                 },
               }
