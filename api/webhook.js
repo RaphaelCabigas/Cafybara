@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     console.log(params);
 
     // * Assign the corresponding parameters used
-    const name = params['given-name'];
+    const name = params['custom-name'];
     const email = params['email'];
     const allowedTime = params['allowed-time'];
     const allowedGuest = params['allowed-guests'];
