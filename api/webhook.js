@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     const name = params['given-name'];
     const email = params['email'];
     const allowedTime = params['allowed-time'];
-    const guests = params['guest-count'];
+    const guest = params['guest-count'];
     const dateRaw = params['date'];
 
     let formattedDate = '';
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: "Reservation Confirmation",
-            subtitle: `Kindly confirm your reservation ${name} (${email}). Reservation date will be on ${formattedDate}, ${allowedTime}, with ${guests} guest/s.`
+            subtitle: `Kindly confirm your reservation ${name} (${email}). Reservation date will be on ${formattedDate}, ${allowedTime}, with ${guest} guest/s.`
           },
           {
             type: "chips",
