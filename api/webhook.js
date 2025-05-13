@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     console.log(params);
 
     // * Assign the corresponding parameters used
-    const name = params['custom-name'];
+    const name = params['given-name'];
     const email = params['email'];
     const allowedTime = params['allowed-time'];
     const allowedGuest = params['allowed-guests'];
@@ -122,7 +122,7 @@ export default async function handler(req, res) {
             type: "divider"
           },
           {
-            type: "description",
+            type: "info",
             title: `Total Price (per Guest):`,
             subtitle: `${totalPrice} AED (${priceRaw} AED)`
           },
