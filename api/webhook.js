@@ -49,7 +49,12 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: "Reservation Confirmation",
-            subtitle: `Kindly confirm your reservation ${name} (${email}). Your reservation will be on ${formattedDate}, ${allowedTime}, with ${allowedGuest} guest/s.`
+            subtitle: `You're all set ${name} (${email})!`
+          },
+          {
+            type: "info",
+            title: "Kindly confirm that your reservation will be on:",
+            subtitle: `${formattedDate}, ${allowedTime}, with ${allowedGuest} guest/s.`
           },
           {
             type: "chips",
