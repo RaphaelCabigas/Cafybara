@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   let payload = {};
 
-  if (intentName === 'BookingReservation') {
+  if (intentName === 'ContinueReservation') {
     // * Extract all the parameters used in the intent or just an empty object
     const params = body.queryResult?.parameters || {};
 
