@@ -47,9 +47,9 @@ export default async function handler(req, res) {
             accessibilityText: "Capybara waiting for a table"
           },
           {
-            type: "info",
+            type: "description",
             title: `Reservation Confirmation`,
-            subtitle: `Name: ${name}\nEmail: ${email}`
+            text: [`Name: ${name}`, `Email: ${email}`]
           },
           {
             "type": "divider"
