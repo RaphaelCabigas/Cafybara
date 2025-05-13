@@ -4177,7 +4177,7 @@ DF_Mk([DF_MA({
 }), DF_Ml("design:type", Array)], DF_MXe.prototype, "chips", void 0);
 DF_Mk([DF_MB(), DF_Ml("design:type", Boolean)], DF_MXe.prototype, "La", void 0);
 DF_MXe = DF_Mk([DF_Mz("df-chips")], DF_MXe);
-var DF_MYe = DF_Mw([".description-line{line-height:1.4;color:rgba(0,0,0,.87);font-size:14px;padding-top:8px;word-break:break-word}#descriptionWrapper{background-color:#fff;border-radius:16px;display:flex;flex-direction:column;font-family: GT Maru, sans-serif;padding:16px;padding-bottom:0;}.title{color:var(--df-messenger-font-color);font-size:14px;font-weight:700;margin:0}"]);
+var DF_MYe = DF_Mw([".description-line{line-height:1.4;color:rgba(0,0,0,.87);font-size:14px;padding-top:8px;word-break:break-word}#descriptionWrapper{background-color:#fff;border-radius:16px;display:flex;flex-direction:column;font-family: GT Maru, sans-serif;padding:16px;}.title{color:var(--df-messenger-font-color);font-size:14px;font-weight:700;margin:0}"]);
 var DF_MZe = DF_Mg(['<h3 class="title"> ', " </h3>"]),
     DF_M_e = DF_Mg(['<div class="description-line"> ', " </div>"]),
     DF_M0e = DF_Mg([' <div id="', '"> ', " ", " </div> "]);
