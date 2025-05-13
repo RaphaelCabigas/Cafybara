@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   let payload = {};
 
-  if (intentName === 'ContinueReservation') {
+  if (intentName === 'ReservationPricing') {
     // * Extract all the parameters used in the intent or just an empty object
     const params = body.queryResult?.parameters || {};
 
@@ -37,38 +37,6 @@ export default async function handler(req, res) {
       // * Any errors occur, get the raw date
     } catch (err) {
       formattedDate = dateRaw;
-    }
-
-    if (!params['reservation-item']) {
-      return res.status(200).json({
-        fulfillmentMessages: [
-          {
-            payload: {
-              richContent: [
-                [
-                  {
-                    type: "info",
-                    title: "Reservation Duration",
-                    subtitle: "How long would you like to reserve a spot at Cafybara?"
-                  },
-                  {
-                    type: "info",
-                    subtitle: "Note: Pricing is per guest based on the duration selected."
-                  },
-                  {
-                    type: "chips",
-                    options: [
-                      { text: "30 minutes - 35 AED" },
-                      { text: "1 hour - 60 AED" },
-                      { text: "1 hour 30 minutes - 80 AED" }
-                    ]
-                  }
-                ]
-              ]
-            }
-          }
-        ]
-      });
     }
 
     const totalPrice = priceRaw * allowedGuest;
