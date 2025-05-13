@@ -48,19 +48,35 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: "Reservation Confirmation",
-            subtitle: `You're all set ${name} (${email})!`
+            title: `${name} ${email} Reservation`,
+            subtitle: `Kindly confirm that your reservation will be on:`
+          },
+          {
+            "type": "divider"
           },
           {
             type: "info",
-            title: "Kindly confirm that your reservation will be on:",
             subtitle: `${formattedDate}, ${allowedTime}, with ${allowedGuest} guest/s.`
           },
           {
             type: "chips",
             options: [
-              { text: "Confirm" },
-              { text: "Cancel" }
+              {
+                text: "Confirm",
+                image: {
+                  src: {
+                    rawUrl: "https://api.iconify.design/material-symbols/check-box-rounded.svg?height=16&color=%235cb338"
+                  }
+                },
+              },
+              {
+                text: "Cancel",
+                image: {
+                  src: {
+                    rawUrl: "https://api.iconify.design/mynaui/letter-x-square-solid.svg?height=16&color=%23e52121"
+                  }
+                },
+              }
             ]
           }
         ]
