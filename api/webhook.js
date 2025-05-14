@@ -147,11 +147,64 @@ export default async function handler(req, res) {
       "🧁 Banana Nut Muffin": 8
     };
 
-    // * Gets the existing cart from the of this intent
-    // * whenever the user wants to add more items 
-    const context = body.queryResult.outputContexts?.find(ctx =>
-      ctx.name.endsWith('/contexts/orderprocess-followup')
-    );
+    if (body.queryResult.queryText === "➕ Add More Items") {
+      // * Gets the existing cart from the of this intent
+      // * whenever the user wants to add more items 
+      const context = body.queryResult.outputContexts?.find(ctx =>
+        ctx.name.endsWith('/contexts/orderprocess-followup')
+      );
+
+      const cart = context?.parameters?.cart || [];
+      payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Please choose another item to add to your cart."
+            },
+            {
+              type: "chips",
+              options: [
+                {
+                  "text": "🥤 Iced Matcha Latte"
+                },
+                {
+                  "text": "☕ Capyccino"
+                },
+                {
+                  "text": "🍌 Cold Brew Banana Twist"
+                },
+                {
+                  "text": "🧃 Strawberry Yakult Fizz"
+                },
+                {
+                  "text": "🧋 Brown Boba Milk Tea"
+                },
+                {
+                  "text": "🧇 Mini Waffle Sticks"
+                },
+                {
+                  "text": "🧀 Cheese Capy-Puffs"
+                },
+                {
+                  "text": "🧁 Banana Nut Muffin"
+                }
+              ]
+            }
+          ]
+        ],
+        outputContexts: [
+          {
+            name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
+            lifespanCount: 5,
+            parameters: {
+              cart,
+              totalPrice
+            }
+          }
+        ]
+      };
+    }
 
     // * if the context exists with a cart then update the cart
     if (context?.parameters?.cart) {
@@ -235,58 +288,6 @@ export default async function handler(req, res) {
               ]
             }
           ]
-        ]
-      };
-    }
-
-    if (body.queryResult.queryText === "➕ Add More Items") {
-      payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "Please choose another item to add to your cart."
-            },
-            {
-              type: "chips",
-              options: [
-                {
-                  "text": "🥤 Iced Matcha Latte"
-                },
-                {
-                  "text": "☕ Capyccino"
-                },
-                {
-                  "text": "🍌 Cold Brew Banana Twist"
-                },
-                {
-                  "text": "🧃 Strawberry Yakult Fizz"
-                },
-                {
-                  "text": "🧋 Brown Boba Milk Tea"
-                },
-                {
-                  "text": "🧇 Mini Waffle Sticks"
-                },
-                {
-                  "text": "🧀 Cheese Capy-Puffs"
-                },
-                {
-                  "text": "🧁 Banana Nut Muffin"
-                }
-              ]
-            }
-          ]
-        ],
-        outputContexts: [
-          {
-            name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
-            lifespanCount: 5,
-            parameters: {
-              cart: cart,
-              totalPrice: totalPrice
-            }
-          }
         ]
       };
     }
