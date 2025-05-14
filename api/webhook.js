@@ -161,25 +161,6 @@ export default async function handler(req, res) {
     let titleCondition = "";
     let subtitleCondition = "";
 
-    // ! Checks if the user's response is available in the menu
-    if (menuItem && !(menuItem in menuPrices)) {
-      payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "❌ Oops! That item is not on available in our store.",
-              subtitle: "Here are the available drinks & snacks you can order:"
-            },
-            {
-              type: "chips",
-              options: Object.keys(menuPrices).map(item => ({ text: item }))
-            }
-          ]
-        ]
-      };
-    }
-
     if (menuItem) {
       // * Checks if the item already exists
       const existingItem = cart.find(item => item.name === menuItem);
