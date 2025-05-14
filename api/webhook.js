@@ -126,7 +126,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       fulfillmentMessages: [
         {
-          payload
+          payload: payload
         }
       ]
     });
@@ -176,7 +176,7 @@ export default async function handler(req, res) {
     const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
     const price = menuPrices[menuItem];
 
-    payload = {
+    const payload = {
       richContent: [
         [
           {
@@ -196,7 +196,7 @@ export default async function handler(req, res) {
       ]
     }
     return res.status(200).json({
-      fulfillmentMessages: [{ payload }],
+      fulfillmentMessages: [{ payload: payload }],
       outputContexts: [
         {
           name: `${body.session}/contexts/order-followup`,
