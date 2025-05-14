@@ -8,6 +8,17 @@ export default async function handler(req, res) {
   const body = req.body;
   const intentName = body.queryResult.intent.displayName;
 
+  // * Menu item prices
+  const menuAvailable = {
+    "☕ Capyccino": 13,
+    "🧃 Strawberry Yakult Fizz": 14,
+    "🥤 Iced Matcha Latte": 15,
+    "🍌 Cold Brew Banana Twist": 17,
+    "🧋 Brown Boba Milk Tea": 13,
+    "🧇 Mini Waffle Sticks": 10,
+    "🧀 Cheese Capy-Puffs": 9,
+    "🧁 Banana Nut Muffin": 8
+  };
   // ! Reservation Pricing and Confirmation
   if (intentName === "ReservationPricing") {
     // * Extract all the parameters from the intent and output used in the intent or just an empty object
@@ -131,88 +142,108 @@ export default async function handler(req, res) {
       ]
     });
   }
-
   // ! Order Process Intent
-  if (intentName === "OrderProcess") {
+  else if (intentName === "OrderProcess") {
     const intentParams = body.queryResult?.parameters || {};
     const outputContexts = body.queryResult.outputContexts || [];
 
     const menuItem = intentParams["menu-item"];
 
-    // 🛍 Prices
-    const menuPrices = {
-      "☕ Capyccino": 13,
-      "🧃 Strawberry Yakult Fizz": 14,
-      "🥤 Iced Matcha Latte": 15,
-      "🍌 Cold Brew Banana Twist": 17,
-      "🧋 Brown Boba Milk Tea": 13,
-      "🧇 Mini Waffle Sticks": 10,
-      "🧀 Cheese Capy-Puffs": 9,
-      "🧁 Banana Nut Muffin": 8
-    };
-
-    // 🔄 Get previous cart from context
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    const existingCart = context?.parameters?.cart || [];
+    let cart = context?.parameters?.cart || [];
 
-    // ❌ No item? Ask again
-    if (!menuItem || !menuPrices[menuItem]) {
-      const payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "What would you like to order?",
-              subtitle: "Here are our items:"
-            },
-            {
-              type: "chips",
-              options: Object.keys(menuPrices).map(item => ({ text: item }))
-            }
-          ]
-        ]
-      };
-      return res.status(200).json({ fulfillmentMessages: [{ payload }] });
+    const existingItem = cart.find(item => item.name === menuItem);
+    if (existingItem) {
+      // * Increase the quantity by 1 if item already exists
+      existingItem.quantity += 1;
+    } else {
+      // * Add the new item to the cart
+      cart.push({
+        name: menuItem,
+        quantity: 1,
+        price: menuAvailable[menuItem]
+      });
     }
 
-    // ✅ Add item to cart
-    const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
+    // * Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    // ✉️ Respond with updated cart message
+    // * Format cart items into readable lines
+    const cartItems = cart.map(item =>
+      `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED`
+    );
+
     const payload = {
       richContent: [
         [
           {
             type: "info",
-            title: `${menuItem} added to your cart!`,
-            subtitle: `Current items: ${newCart.length}`
+            title: `${menuItem} has been added to your cart!`,
+            subtitle: `💰 Total Price: ${totalPrice} AED`,
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "description",
+            title: "🛒 Your Cart",
+            text: cartItems
           },
           {
             type: "chips",
             options: [
-              { text: "Add More" },
+              { text: "Add More Items" },
               { text: "Checkout" },
-              { text: "Cancel Order" }
+              { text: "Cancel" }
             ]
           }
         ]
       ]
-    };
+    }
 
-    // 🔁 Send response with updated context
+    return res.status(200).json({
+      fulfillmentMessages: [{ payload: payload }],
+      outputContexts: [
+        {
+          name: `${body.session}/contexts/order-followup`,
+          lifespanCount: 5,
+          parameters: { cart: cart }
+        }
+      ]
+    });
+  }
+  // ! Add More Menu Items Intent
+  else if (intentName === "AddMore") {
+    const outputContexts = body.queryResult.outputContexts || [];
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
+    const cart = context?.parameters?.cart || [];
+
+    const payload = {
+      richContent: [
+        [
+          {
+            type: "info",
+            title: "Adding more to your cart!",
+            subtitle: "What would you like to add more for your order?",
+          },
+          {
+            type: "chips",
+            options: Object.keys(menuAvailable).map(item => ({ text: item }))
+          }
+        ]
+      ]
+    }
     return res.status(200).json({
       fulfillmentMessages: [{ payload }],
       outputContexts: [
         {
           name: `${body.session}/contexts/order-followup`,
           lifespanCount: 5,
-          parameters: { cart: newCart }
+          parameters: { cart }
         }
       ]
     });
   }
-
-
 
   else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
