@@ -133,16 +133,13 @@ export default async function handler(req, res) {
   }
 
   // ! Order Process Intent
-  else if (intentName === "OrderProcess") {
+  if (intentName === "OrderProcess") {
     const intentParams = body.queryResult?.parameters || {};
     const outputContexts = body.queryResult.outputContexts || [];
 
     const menuItem = intentParams["menu-item"];
 
-    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    const existingCart = context?.parameters?.cart || [];
-
-    // * Menu item prices
+    // 🛍 Prices
     const menuPrices = {
       "☕ Capyccino": 13,
       "🧃 Strawberry Yakult Fizz": 14,
@@ -154,14 +151,19 @@ export default async function handler(req, res) {
       "🧁 Banana Nut Muffin": 8
     };
 
-    if (!menuItem) {
+    // 🔄 Get previous cart from context
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
+    const existingCart = context?.parameters?.cart || [];
+
+    // ❌ No item? Ask again
+    if (!menuItem || !menuPrices[menuItem]) {
       const payload = {
         richContent: [
           [
             {
               type: "info",
-              title: "Oops! we don't sell that at our store.",
-              subtitle: "These are the only available drinks & snacks we offer:"
+              title: "What would you like to order?",
+              subtitle: "Here are our items:"
             },
             {
               type: "chips",
@@ -169,32 +171,35 @@ export default async function handler(req, res) {
             }
           ]
         ]
-      }
+      };
       return res.status(200).json({ fulfillmentMessages: [{ payload }] });
     }
 
+    // ✅ Add item to cart
     const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
-    const price = menuPrices[menuItem];
 
-    payload = {
+    // ✉️ Respond with updated cart message
+    const payload = {
       richContent: [
         [
           {
             type: "info",
-            title: `${menuItem} has been added to your cart!`,
-            subtitle: `Price: ${price} AED`
+            title: `${menuItem} added to your cart!`,
+            subtitle: `Current items: ${newCart.length}`
           },
           {
             type: "chips",
             options: [
               { text: "Add More" },
               { text: "Checkout" },
-              { text: "Cancel" }
+              { text: "Cancel Order" }
             ]
           }
         ]
       ]
-    }
+    };
+
+    // 🔁 Send response with updated context
     return res.status(200).json({
       fulfillmentMessages: [{ payload }],
       outputContexts: [
@@ -206,6 +211,7 @@ export default async function handler(req, res) {
       ]
     });
   }
+
 
 
   else if (intentName === "Checkout") {
