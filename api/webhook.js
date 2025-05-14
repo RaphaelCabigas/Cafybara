@@ -315,6 +315,7 @@ export default async function handler(req, res) {
           {
             type: "chips",
             options: [
+              { text: "➕ Add More Items" },
               {
                 text: "Confirm",
                 image: {
@@ -364,7 +365,6 @@ export default async function handler(req, res) {
       ]]
     };
 
-    // * Resets the cart
     return res.status(200).json({
       fulfillmentMessages: [{ payload: payload }],
       outputContexts: [
