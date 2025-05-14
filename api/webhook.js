@@ -200,7 +200,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `${menuItem} has been added to your cart!`,
-            subtitle: `x${existingItem ? existingItem.quantity : 1} - ${existingItem.price * existingItem.quantity} AED`
+            subtitle: `💰 Total Price: ${totalPrice} AED`,
           },
           {
             type: "divider"
@@ -208,7 +208,6 @@ export default async function handler(req, res) {
           {
             type: "description",
             title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ${totalPrice} AED`,
             text: cartItems
           },
           {
