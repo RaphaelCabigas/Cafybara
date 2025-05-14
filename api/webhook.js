@@ -170,7 +170,7 @@ export default async function handler(req, res) {
           ]
         ]
       }
-      return res.status(200).json({ fulfillmentMessages: [{ payload }] });
+      return res.status(200).json({ fulfillmentMessages: [{ payload: payload }] });
     }
 
     const existingItem = cart.find(item => item.name === menuItem);
@@ -200,7 +200,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `${menuItem} has been added to your cart!`,
-            subtitle: `x${existingItem.quantity} - ${existingItem.price * existingItem.quantity} AED`
+            subtitle: `x${existingItem ? existingItem.quantity : 1} - ${existingItem.price * existingItem.quantity} AED`
           },
           {
             type: "divider"
