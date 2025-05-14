@@ -337,7 +337,6 @@ export default async function handler(req, res) {
       ]
     };
 
-    //* Resets the cart
     return res.status(200).json({
       fulfillmentMessages: [
         {
