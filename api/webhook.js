@@ -138,6 +138,7 @@ export default async function handler(req, res) {
     const outputContexts = body.queryResult.outputContexts || [];
 
     const menuItem = intentParams["menu-item"];
+    const action = intentParams["action"];
 
     // * Menu item prices
     const menuAvailable = {
@@ -171,6 +172,36 @@ export default async function handler(req, res) {
         ]
       }
       return res.status(200).json({ fulfillmentMessages: [{ payload: payload }] });
+    }
+
+    if (action === "Add More") {
+      const payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "What would you like to add next?",
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "chips",
+              options: Object.keys(menuAvailable).map(item => ({ text: item }))
+            }
+          ]
+        ]
+      };
+      return res.status(200).json({
+        fulfillmentMessages: [{ payload: payload }],
+        outputContexts: [
+          {
+            name: `${body.session}/contexts/order-followup`,
+            lifespanCount: 5,
+            parameters: { cart: cart }
+          }
+        ]
+      });
     }
 
     const existingItem = cart.find(item => item.name === menuItem);
@@ -213,7 +244,7 @@ export default async function handler(req, res) {
           {
             type: "chips",
             options: [
-              { text: "Add More" },
+              { text: "Add More", action: "Add More" },
               { text: "Checkout" },
               { text: "Cancel" }
             ]
