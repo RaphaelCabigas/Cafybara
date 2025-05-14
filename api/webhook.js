@@ -138,10 +138,12 @@ export default async function handler(req, res) {
     const outputContexts = body.queryResult.outputContexts || [];
 
     const menuItem = intentParams["menu-item"];
-    const action = intentParams["action"];
+
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
+    const existingCart = context?.parameters?.cart || [];
 
     // * Menu item prices
-    const menuAvailable = {
+    const menuPrices = {
       "☕ Capyccino": 13,
       "🧃 Strawberry Yakult Fizz": 14,
       "🥤 Iced Matcha Latte": 15,
@@ -152,10 +154,7 @@ export default async function handler(req, res) {
       "🧁 Banana Nut Muffin": 8
     };
 
-    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    let cart = context?.parameters?.cart || [];
-
-    if (!menuItem || !menuAvailable[menuItem]) {
+    if (!menuItem) {
       const payload = {
         richContent: [
           [
@@ -166,85 +165,29 @@ export default async function handler(req, res) {
             },
             {
               type: "chips",
-              options: Object.keys(menuAvailable).map(item => ({ text: item }))
+              options: Object.keys(menuPrices).map(item => ({ text: item }))
             }
           ]
         ]
       }
-      return res.status(200).json({ fulfillmentMessages: [{ payload: payload }] });
+      return res.status(200).json({ fulfillmentMessages: [{ payload }] });
     }
 
-    if (action === "Add More") {
-      const payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "What would you like to add next?",
-            },
-            {
-              type: "divider"
-            },
-            {
-              type: "chips",
-              options: Object.keys(menuAvailable).map(item => ({ text: item }))
-            }
-          ]
-        ]
-      };
-      return res.status(200).json({
-        fulfillmentMessages: [{ payload: payload }],
-        outputContexts: [
-          {
-            name: `${body.session}/contexts/order-followup`,
-            lifespanCount: 5,
-            parameters: { cart: cart }
-          }
-        ]
-      });
-    }
+    const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
+    const price = menuPrices[menuItem];
 
-    const existingItem = cart.find(item => item.name === menuItem);
-    if (existingItem) {
-      // * Increase the quantity by 1 if item already exists
-      existingItem.quantity += 1;
-    } else {
-      // * Add the new item to the cart
-      cart.push({
-        name: menuItem,
-        quantity: 1,
-        price: menuAvailable[menuItem]
-      });
-    }
-
-    // * Calculate total price
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    // * Format cart items into readable lines
-    const cartItems = cart.map(item =>
-      `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED`
-    );
-
-    const payload = {
+    payload = {
       richContent: [
         [
           {
             type: "info",
             title: `${menuItem} has been added to your cart!`,
-            subtitle: `💰 Total Price: ${totalPrice} AED`,
-          },
-          {
-            type: "divider"
-          },
-          {
-            type: "description",
-            title: "🛒 Your Cart",
-            text: cartItems
+            subtitle: `Price: ${price} AED`
           },
           {
             type: "chips",
             options: [
-              { text: "Add More", action: "Add More" },
+              { text: "Add More" },
               { text: "Checkout" },
               { text: "Cancel" }
             ]
@@ -252,14 +195,13 @@ export default async function handler(req, res) {
         ]
       ]
     }
-
     return res.status(200).json({
-      fulfillmentMessages: [{ payload: payload }],
+      fulfillmentMessages: [{ payload }],
       outputContexts: [
         {
           name: `${body.session}/contexts/order-followup`,
           lifespanCount: 5,
-          parameters: { cart: cart }
+          parameters: { cart: newCart }
         }
       ]
     });
