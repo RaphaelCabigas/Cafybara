@@ -260,7 +260,8 @@ export default async function handler(req, res) {
           }
         ]
       ]
-    }
+    };
+
     return res.status(200).json({
       fulfillmentMessages: [{ payload }],
       outputContexts: [
@@ -282,12 +283,19 @@ export default async function handler(req, res) {
 
     // * Calculate total price
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    // * Format the cart items again
-    const cartItems = cart.map(item => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED)`).join("\n");
+
+    // * Format cart items into readable lines
+    const cartItems = cart.map(item =>
+      `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED`
+    );
 
     const payload = {
       richContent: [
         [
+          {
+            type: "info",
+            title: ` Order Confirmation`
+          },
           {
             type: "description",
             title: "🛒 Your Cart",
