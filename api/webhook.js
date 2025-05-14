@@ -56,15 +56,14 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Reservation Confirmation`,
-            subtitle: "Kindly confirm that your reservation."
+            title: `Kindly confirm that your reservation details are correct.`
           },
           {
             type: "divider"
           },
           {
             type: "info",
-            title: `Name:`,
+            title: `🧑‍💼 Your Name:`,
             subtitle: `${name}`
           },
           {
@@ -72,7 +71,7 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Email:`,
+            title: `📧 Your Email:`,
             subtitle: `${email}`
           },
           {
@@ -80,7 +79,7 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Date & Time:`,
+            title: `📅 Date & Time Reservation:`,
             subtitle: `${formattedDate} & ${allowedTime}`
           },
           {
@@ -88,7 +87,7 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Guest/s:`,
+            title: `👥 Guest/s:`,
             subtitle: `${allowedGuest}`
           },
           {
@@ -96,7 +95,7 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Total Price (per Guest):`,
+            title: `💰 Total Price (💵 per Guest):`,
             subtitle: `${totalPrice} AED (${priceRaw} AED)`
           },
           {
