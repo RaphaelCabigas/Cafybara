@@ -147,94 +147,81 @@ export default async function handler(req, res) {
       "🧁 Banana Nut Muffin": 8
     };
 
-    if (body.queryResult.queryText === "➕ Add More Items") {
-      // * Gets the existing cart from the of this intent
-      // * whenever the user wants to add more items 
-      const context = body.queryResult.outputContexts?.find(ctx =>
-        ctx.name.endsWith('/contexts/orderprocess-followup')
-      );
-
-      const cart = context?.parameters?.cart || [];
-      payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "Please choose another item to add to your cart."
-            },
-            {
-              type: "chips",
-              options: [
-                {
-                  "text": "🥤 Iced Matcha Latte"
-                },
-                {
-                  "text": "☕ Capyccino"
-                },
-                {
-                  "text": "🍌 Cold Brew Banana Twist"
-                },
-                {
-                  "text": "🧃 Strawberry Yakult Fizz"
-                },
-                {
-                  "text": "🧋 Brown Boba Milk Tea"
-                },
-                {
-                  "text": "🧇 Mini Waffle Sticks"
-                },
-                {
-                  "text": "🧀 Cheese Capy-Puffs"
-                },
-                {
-                  "text": "🧁 Banana Nut Muffin"
-                }
-              ]
-            }
-          ]
-        ],
-        outputContexts: [
-          {
-            name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
-            lifespanCount: 5,
-            parameters: {
-              cart,
-              totalPrice
-            }
-          }
-        ]
-      };
-    }
+    // * Gets the existing cart from the of this intent
+    // * whenever the user wants to add more items 
+    const context = body.queryResult.outputContexts?.find(ctx =>
+      ctx.name.endsWith('/contexts/orderprocess-followup')
+    );
 
     // * if the context exists with a cart then update the cart
     if (context?.parameters?.cart) {
       cart = context.parameters.cart;
     }
 
-    // * Checks if the item already exists
-    const existingItem = cart.find(item => item.name === menuItem);
+    let titleCondition = "";
+    let subtitleCondition = "";
 
-    if (existingItem) {
-      // * increase the quantity by 1
-      existingItem.quantity += 1;
+    if (cart.length === 0 || body.queryResult.queryText === "➕ Add More Items") {
+      // * Calculates the total price
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      //* Change the payload title depending on the condition
+      titleCondition = cart.length === 0
+        ? "🛒 Your cart is empty."
+        : "What would you want to add more to your cart?";
+
+      subtitleCondition = cart.length === 0 ?
+        "📜 What would you like to order?"
+        : `💰 Total Price: ${totalPrice} AED`;
+
+      payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: titleCondition,
+              subtitle: subtitleCondition
+            },
+            {
+              type: "chips",
+              options: [
+                { text: "🥤 Iced Matcha Latte" },
+                { text: "☕ Capyccino" },
+                { text: "🍌 Cold Brew Banana Twist" },
+                { text: "🧃 Strawberry Yakult Fizz" },
+                { text: "🧋 Brown Boba Milk Tea" },
+                { text: "🧇 Mini Waffle Sticks" },
+                { text: "🧀 Cheese Capy-Puffs" },
+                { text: "🧁 Banana Nut Muffin" }
+              ]
+            }
+          ]
+        ]
+      };
     } else {
-      // * Add the new item to the cart
-      cart.push({ name: menuItem, quantity: 1, price: menuPrices[menuItem] });
-    }
+      // * Checks if the item already exists
+      const existingItem = cart.find(item => item.name === menuItem);
 
-    // * Calculates the total price
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    // * Map the items with the corresponding name and quantity
-    const cartItems = cart.map(item => `${item.name} x${item.quantity} - ${item.price * item.quantity} AED`);
+      if (existingItem) {
+        // * increase the quantity by 1
+        existingItem.quantity += 1;
+      } else {
+        // * Add the new item to the cart
+        cart.push({ name: menuItem, quantity: 1, price: menuPrices[menuItem] });
+      }
 
-    if (cart.length > 0) {
+      // * Calculates the total price
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      // * Map the items with the corresponding name and quantity
+      const cartItems = cart.map(item => `${item.name} x${item.quantity} - ${item.price * item.quantity} AED`);
+
       payload = {
         richContent: [
           [
             {
               type: "info",
               title: `${menuItem} has been added to your cart!`,
-              subtitle: `💰 Total Price: ${totalPrice}`
+              subtitle: `💰 Total Price: ${totalPrice} AED`
             },
             {
               type: "divider"
@@ -263,31 +250,16 @@ export default async function handler(req, res) {
               ]
             }
           ]
-        ]
-      };
-    } else {
-      payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: "🛒 Your cart is empty.",
-              subtitle: "📜 What would you like to order?"
-            },
-            {
-              type: "chips",
-              options: [
-                { text: "🥤 Iced Matcha Latte" },
-                { text: "☕ Capyccino" },
-                { text: "🍌 Cold Brew Banana Twist" },
-                { text: "🧃 Strawberry Yakult Fizz" },
-                { text: "🧋 Brown Boba Milk Tea" },
-                { text: "🧇 Mini Waffle Sticks" },
-                { text: "🧀 Cheese Capy-Puffs" },
-                { text: "🧁 Banana Nut Muffin" }
-              ]
+        ],
+        outputContexts: [
+          {
+            name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
+            lifespanCount: 5,
+            parameters: {
+              cart,
+              totalPrice
             }
-          ]
+          }
         ]
       };
     }
@@ -351,7 +323,6 @@ export default async function handler(req, res) {
       fulfillmentMessages: [
         {
           payload: payload
-
         }
       ],
       outputContexts: [
