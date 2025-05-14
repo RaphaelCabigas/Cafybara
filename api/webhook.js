@@ -229,7 +229,7 @@ export default async function handler(req, res) {
         {
           name: `${body.session}/contexts/order-followup`,
           lifespanCount: 5,
-          parameters: { cart: newCart }
+          parameters: { cart: cart }
         }
       ]
     });
