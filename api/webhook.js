@@ -8,8 +8,6 @@ export default async function handler(req, res) {
   const body = req.body;
   const intentName = body.queryResult.intent.displayName;
 
-  let payload = {};
-
   // ! Reservation Pricing and Confirmation
   if (intentName === "ReservationPricing") {
     // * Extract all the parameters from the intent and output used in the intent or just an empty object
@@ -47,7 +45,7 @@ export default async function handler(req, res) {
 
     const totalPrice = priceRaw * allowedGuest;
 
-    payload = {
+    const payload = {
       richContent: [
         [
           {
@@ -123,13 +121,26 @@ export default async function handler(req, res) {
         ]
       ]
     };
+
+    // * Return successful payload
+    return res.status(200).json({
+      fulfillmentMessages: [
+        {
+          payload
+        }
+      ]
+    });
   }
 
   // ! Order Process Intent
   else if (intentName === "OrderProcess") {
     const intentParams = body.queryResult?.parameters || {};
+    const outputContexts = body.queryResult.outputContexts || [];
 
     const menuItem = intentParams["menu-item"];
+
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
+    const existingCart = context?.parameters?.cart || [];
 
     // * Menu item prices
     const menuPrices = {
@@ -142,8 +153,9 @@ export default async function handler(req, res) {
       "🧀 Cheese Capy-Puffs": 9,
       "🧁 Banana Nut Muffin": 8
     };
+
     if (!menuItem) {
-      payload = {
+      const payload = {
         richContent: [
           [
             {
@@ -158,8 +170,44 @@ export default async function handler(req, res) {
           ]
         ]
       }
+      return res.status(200).json({ fulfillmentMessages: [{ payload }] });
     }
+
+    const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
+    const price = menuPrices[menuItem];
+
+    payload = {
+      richContent: [
+        [
+          {
+            type: "info",
+            title: `${menuItem} has been added to your cart!`,
+            subtitle: `Price: ${price} AED`
+          },
+          {
+            type: "chips",
+            options: [
+              { text: "Add More" },
+              { text: "Checkout" },
+              { text: "Cancel" }
+            ]
+          }
+        ]
+      ]
+    }
+    return res.status(200).json({
+      fulfillmentMessages: [{ payload }],
+      outputContexts: [
+        {
+          name: `${body.session}/contexts/order-followup`,
+          lifespanCount: 5,
+          parameters: { cart: newCart }
+        }
+      ]
+    });
   }
+
+
   else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
     const cartContext = body.queryResult.outputContexts?.find(ctx =>
@@ -229,13 +277,4 @@ export default async function handler(req, res) {
       ]
     });
   }
-
-  // * Return successful payload
-  return res.status(200).json({
-    fulfillmentMessages: [
-      {
-        payload: payload
-      }
-    ]
-  });
 }
