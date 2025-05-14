@@ -227,7 +227,7 @@ export default async function handler(req, res) {
       fulfillmentMessages: [{ payload: payload }],
       outputContexts: [
         {
-          name: `${body.session} / contexts / order - followup`,
+          name: `${body.session}/contexts/order-followup`,
           lifespanCount: 5,
           parameters: { cart: newCart }
         }
@@ -239,7 +239,7 @@ export default async function handler(req, res) {
   else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
     const cartContext = body.queryResult.outputContexts?.find(ctx =>
-      ctx.name.endsWith('/contexts/orderprocess-followup')
+      ctx.name.endsWith('/contexts/order-followup')
     );
 
     // * Get the cart and totalPrice from the context parameters
@@ -299,7 +299,7 @@ export default async function handler(req, res) {
       outputContexts: [
         {
           // * Clear the session for order process
-          name: `projects / cafybara - rjpb / agent / sessions / ${sessionId} / contexts / orderprocess - followup`,
+          name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/order-followup`,
           lifespanCount: 0
         }
       ]
