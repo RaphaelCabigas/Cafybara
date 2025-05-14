@@ -161,44 +161,26 @@ export default async function handler(req, res) {
     let titleCondition = "";
     let subtitleCondition = "";
 
-    if (cart.length === 0 || !menuItem || body.queryResult.queryText === "➕ Add More Items") {
-      // * Calculates the total price
-      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-      //* Change the payload title depending on the condition
-      titleCondition = cart.length === 0
-        ? "🛒 Your cart is empty."
-        : "What would you want to add more to your cart?";
-
-      subtitleCondition = cart.length === 0 ?
-        "📜 What would you like to order?"
-        : `💰 Total Price: ${totalPrice} AED`;
-
+    // ! Checks if the user's response is available in the menu
+    if (menuItem && !(menuItem in menuPrices)) {
       payload = {
         richContent: [
           [
             {
               type: "info",
-              title: titleCondition,
-              subtitle: subtitleCondition
+              title: "❌ Oops! That item is not on available in our store.",
+              subtitle: "Here are the available drinks & snacks you can order:"
             },
             {
               type: "chips",
-              options: [
-                { text: "🥤 Iced Matcha Latte" },
-                { text: "☕ Capyccino" },
-                { text: "🍌 Cold Brew Banana Twist" },
-                { text: "🧃 Strawberry Yakult Fizz" },
-                { text: "🧋 Brown Boba Milk Tea" },
-                { text: "🧇 Mini Waffle Sticks" },
-                { text: "🧀 Cheese Capy-Puffs" },
-                { text: "🧁 Banana Nut Muffin" }
-              ]
+              options: Object.keys(menuPrices).map(item => ({ text: item }))
             }
           ]
         ]
       };
-    } else {
+    }
+
+    if (menuItem) {
       // * Checks if the item already exists
       const existingItem = cart.find(item => item.name === menuItem);
 
@@ -260,6 +242,35 @@ export default async function handler(req, res) {
               totalPrice
             }
           }
+        ]
+      };
+    }
+    else {
+      // * Calculates the total price
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      //* Change the payload title depending on the condition
+      titleCondition = cart.length === 0
+        ? "🛒 Your cart is empty."
+        : "What would you want to add more to your cart?";
+
+      subtitleCondition = cart.length === 0 ?
+        "📜 What would you like to order?"
+        : `💰 Total Price: ${totalPrice} AED`;
+
+      payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: titleCondition,
+              subtitle: subtitleCondition
+            },
+            {
+              type: "chips",
+              options: Object.keys(menuPrices).map(item => ({ text: item }))
+            }
+          ]
         ]
       };
     }
