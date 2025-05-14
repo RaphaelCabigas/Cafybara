@@ -245,9 +245,6 @@ export default async function handler(req, res) {
             subtitle: `What would you like to add more? `
           },
           {
-            type: "divider"
-          },
-          {
             type: "chips",
             options: [...Object.keys(menuAvailable).map(item => ({ text: item })),
             { text: "🛒 Checkout" },
@@ -288,7 +285,7 @@ export default async function handler(req, res) {
     // * Format the cart items again
     const cartItems = cart.map(item => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED)`).join("\n");
 
-    payload = {
+    const payload = {
       richContent: [
         [
           {
@@ -364,7 +361,7 @@ export default async function handler(req, res) {
 
     // * Resets the cart
     return res.status(200).json({
-      fulfillmentMessages: [{ payload }],
+      fulfillmentMessages: [{ payload: payload }],
       outputContexts: [
         {
           name: `${body.session}/contexts/order-followup`,
