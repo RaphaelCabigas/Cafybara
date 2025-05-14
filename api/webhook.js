@@ -178,7 +178,7 @@ export default async function handler(req, res) {
         [
           {
             type: "info",
-            title: `${menuItem} has been added to your cart!`,
+            title: `${menuItem} added to cart!`,
             subtitle: `💰 Total Price: ${totalPrice} AED`,
           },
           {
@@ -192,9 +192,15 @@ export default async function handler(req, res) {
           {
             type: "chips",
             options: [
-              { text: "Add More Items" },
-              { text: "Checkout" },
-              { text: "Cancel" }
+              { text: "➕ Add More Items" },
+              { text: "🛒 Checkout" },
+              {
+                text: "Cancel", image: {
+                  src: {
+                    rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
+                  }
+                }
+              }
             ]
           }
         ]
@@ -213,22 +219,45 @@ export default async function handler(req, res) {
     });
   }
   // ! Add More Menu Items Intent
-  else if (intentName === "AddMore") {
+  else if (intentName === "OrderAddMore") {
     const outputContexts = body.queryResult.outputContexts || [];
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    const cart = context?.parameters?.cart || [];
+
+    // * Get the cart and totalPrice from the context parameters
+    const cart = context?.parameters.cart || [];
+    const totalPrice = context?.parameters.totalPrice || 0;
 
     const payload = {
       richContent: [
         [
           {
             type: "info",
-            title: "Adding more to your cart!",
-            subtitle: "What would you like to add more for your order?",
+            title: "🛒 Your Cart",
+            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "info",
+            subtitle: `What would you like to add more? `
+          },
+          {
+            type: "divider"
           },
           {
             type: "chips",
-            options: Object.keys(menuAvailable).map(item => ({ text: item }))
+            options: [...Object.keys(menuAvailable).map(item => ({ text: item })),
+            { text: "🛒 Checkout" },
+            {
+              text: "Cancel",
+              image: {
+                src: {
+                  rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
+                }
+              }
+            }
+            ]
           }
         ]
       ]
@@ -247,31 +276,30 @@ export default async function handler(req, res) {
 
   else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
-    const cartContext = body.queryResult.outputContexts?.find(ctx =>
+    const context = body.queryResult.outputContexts?.find(ctx =>
       ctx.name.endsWith('/contexts/order-followup')
     );
 
     // * Get the cart and totalPrice from the context parameters
-    const cart = cartContext?.parameters.cart || [];
-    const totalPrice = cartContext?.parameters.totalPrice || 0;
+    const cart = context?.parameters.cart || [];
+    const totalPrice = context?.parameters.totalPrice || 0;
 
     // * Format the cart items again
-    const cartItems = cart.map(item => `${item.name}(x${item.quantity} - ${item.price * item.quantity} AED)`).join("\n");
+    const cartItems = cart.map(item => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED)`).join("\n");
 
     payload = {
       richContent: [
         [
           {
             type: "info",
-            title: "Checkout Details:"
+            title: "🛒 Your Cart",
+            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `
           },
           {
             type: "divider"
           },
           {
             type: "description",
-            title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `,
             text: cartItems
           },
           {
@@ -299,6 +327,7 @@ export default async function handler(req, res) {
       ]
     };
 
+    //* Resets the cart
     return res.status(200).json({
       fulfillmentMessages: [
         {
@@ -307,11 +336,41 @@ export default async function handler(req, res) {
       ],
       outputContexts: [
         {
-          // * Clear the session for order process
-          name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/order-followup`,
+          name: `${body.session}/contexts/order-followup`,
           lifespanCount: 0
         }
       ]
     });
   }
+
+  else if (intentName === "OrderCancel") {
+    const payload = {
+      richContent: [[
+        {
+          type: "info",
+          title: "🗑️ Your order has been canceled.",
+          subtitle: "Let us know if you'd like to start a new one!"
+        },
+        {
+          type: "chips",
+          options: [
+            { text: "✍️ Start New Order" },
+            { text: "🏡 Home" }
+          ]
+        }
+      ]]
+    };
+
+    // * Resets the cart
+    return res.status(200).json({
+      fulfillmentMessages: [{ payload }],
+      outputContexts: [
+        {
+          name: `${body.session}/contexts/order-followup`,
+          lifespanCount: 0
+        }
+      ]
+    });
+  }
+
 }
