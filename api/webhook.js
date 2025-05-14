@@ -294,7 +294,11 @@ export default async function handler(req, res) {
         [
           {
             type: "info",
-            title: ` Order Confirmation`
+            title: ` Order Confirmation`,
+            subtitle: "Would you like to proceed and purchase?"
+          },
+          {
+            type: "divider"
           },
           {
             type: "description",
