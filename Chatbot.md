@@ -33,6 +33,7 @@ All styles and html have been changed through the main.js file
 - ### #messageList .message.bot-message - border: 4px solid var(--df-messenger-font-color);
 - ### button#widgetIcon:hover{transform: scale(1.2);}
 - ### .text-container{display: flex; flex-direction: column; gap: 8px;}
+- ### .title {line-height:1.5}
 
 ## Chatbot HTML
 
