@@ -225,7 +225,9 @@ export default async function handler(req, res) {
 
     // * Get the cart and totalPrice from the context parameters
     const cart = context?.parameters.cart || [];
-    const totalPrice = context?.parameters.totalPrice || 0;
+
+    // * Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const payload = {
       richContent: [
@@ -233,7 +235,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `
+            subtitle: `💰 Total Price: ${totalPrice} AED `
           },
           {
             type: "divider"
@@ -282,8 +284,9 @@ export default async function handler(req, res) {
 
     // * Get the cart and totalPrice from the context parameters
     const cart = context?.parameters.cart || [];
-    const totalPrice = context?.parameters.totalPrice || 0;
 
+    // * Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     // * Format the cart items again
     const cartItems = cart.map(item => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED)`).join("\n");
 
@@ -293,7 +296,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `
+            subtitle: `💰 Total Price: ${totalPrice} AED `
           },
           {
             type: "divider"
