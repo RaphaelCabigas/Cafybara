@@ -292,16 +292,16 @@ export default async function handler(req, res) {
       richContent: [
         [
           {
-            type: "info",
+            type: "description",
             title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ${totalPrice} AED `
+            text: cartItems
           },
           {
             type: "divider"
           },
           {
-            type: "description",
-            text: cartItems
+            type: "info",
+            title: `💰 Total Price: ${totalPrice} AED`
           },
           {
             type: "chips",
