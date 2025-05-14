@@ -343,12 +343,6 @@ export default async function handler(req, res) {
         {
           payload: payload
         }
-      ],
-      outputContexts: [
-        {
-          name: `${body.session}/contexts/order-followup`,
-          lifespanCount: 0
-        }
       ]
     });
   }
