@@ -148,8 +148,8 @@ export default async function handler(req, res) {
           [
             {
               type: "info",
-              title: titleCondition,
-              subtitle: subtitleCondition
+              title: "Oops! we don't sell that at our store.",
+              subtitle: "These are the only available drinks & snacks we offer:"
             },
             {
               type: "chips",
@@ -160,7 +160,6 @@ export default async function handler(req, res) {
       }
     }
   }
-
   else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
     const cartContext = body.queryResult.outputContexts?.find(ctx =>
