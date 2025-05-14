@@ -277,10 +277,8 @@ export default async function handler(req, res) {
   }
 
   else if (intentName === "Checkout") {
-    // * Retrieve the cart and total price from OrderProcess' outputContext
-    const context = body.queryResult.outputContexts?.find(ctx =>
-      ctx.name.endsWith('/contexts/order-followup')
-    );
+    const outputContexts = body.queryResult.outputContexts || [];
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
 
     // * Get the cart and totalPrice from the context parameters
     const cart = context?.parameters.cart || [];
