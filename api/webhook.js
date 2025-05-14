@@ -139,11 +139,8 @@ export default async function handler(req, res) {
 
     const menuItem = intentParams["menu-item"];
 
-    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    const existingCart = context?.parameters?.cart || [];
-
     // * Menu item prices
-    const menuPrices = {
+    const menuAvailable = {
       "☕ Capyccino": 13,
       "🧃 Strawberry Yakult Fizz": 14,
       "🥤 Iced Matcha Latte": 15,
@@ -154,7 +151,10 @@ export default async function handler(req, res) {
       "🧁 Banana Nut Muffin": 8
     };
 
-    if (!menuItem) {
+    const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
+    let cart = context?.parameters?.cart || [];
+
+    if (!menuItem || !menuAvailable[menuItem]) {
       const payload = {
         richContent: [
           [
@@ -165,7 +165,7 @@ export default async function handler(req, res) {
             },
             {
               type: "chips",
-              options: Object.keys(menuPrices).map(item => ({ text: item }))
+              options: Object.keys(menuAvailable).map(item => ({ text: item }))
             }
           ]
         ]
@@ -173,8 +173,26 @@ export default async function handler(req, res) {
       return res.status(200).json({ fulfillmentMessages: [{ payload }] });
     }
 
-    const newCart = [...existingCart, { item: menuItem, price: menuPrices[menuItem] }];
-    const price = menuPrices[menuItem];
+    const existingItem = cart.find(item => item.name === menuItem);
+    if (existingItem) {
+      // * Increase the quantity by 1 if item already exists
+      existingItem.quantity += 1;
+    } else {
+      // * Add the new item to the cart
+      cart.push({
+        name: menuItem,
+        quantity: 1,
+        price: menuAvailable[menuItem]
+      });
+    }
+
+    // * Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    // * Format cart items into readable lines
+    const cartItems = cart.map(item =>
+      `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED`
+    );
 
     const payload = {
       richContent: [
@@ -182,7 +200,16 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `${menuItem} has been added to your cart!`,
-            subtitle: `Price: ${price} AED`
+            subtitle: `x${existingItem.quantity} - ${existingItem.price * existingItem.quantity} AED`
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "description",
+            title: "🛒 Your Cart",
+            subtitle: `💰 Total Price: ${totalPrice} AED`,
+            text: cartItems
           },
           {
             type: "chips",
@@ -195,11 +222,12 @@ export default async function handler(req, res) {
         ]
       ]
     }
+
     return res.status(200).json({
       fulfillmentMessages: [{ payload: payload }],
       outputContexts: [
         {
-          name: `${body.session}/contexts/order-followup`,
+          name: `${body.session} / contexts / order - followup`,
           lifespanCount: 5,
           parameters: { cart: newCart }
         }
@@ -219,7 +247,7 @@ export default async function handler(req, res) {
     const totalPrice = cartContext?.parameters.totalPrice || 0;
 
     // * Format the cart items again
-    const cartItems = cart.map(item => `${item.name} (x${item.quantity} - ${item.price * item.quantity} AED)`).join("\n");
+    const cartItems = cart.map(item => `${item.name}(x${item.quantity} - ${item.price * item.quantity} AED)`).join("\n");
 
     payload = {
       richContent: [
@@ -234,7 +262,7 @@ export default async function handler(req, res) {
           {
             type: "description",
             title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: **${totalPrice} AED**`,
+            subtitle: `💰 Total Price: ** ${totalPrice} AED ** `,
             text: cartItems
           },
           {
@@ -271,7 +299,7 @@ export default async function handler(req, res) {
       outputContexts: [
         {
           // * Clear the session for order process
-          name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
+          name: `projects / cafybara - rjpb / agent / sessions / ${sessionId} / contexts / orderprocess - followup`,
           lifespanCount: 0
         }
       ]
