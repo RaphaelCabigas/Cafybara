@@ -138,9 +138,9 @@ export default async function handler(req, res) {
     // * Menu item prices
     const menuPrices = {
       "☕ Capyccino": 13,
-      "🍌 Strawberry Yakult Fizz": 14,
+      "🧃 Strawberry Yakult Fizz": 14,
       "🥤 Iced Matcha Latte": 15,
-      "🧃 Cold Brew Banana Twist": 17,
+      "🍌 Cold Brew Banana Twist": 17,
       "🧋 Brown Boba Milk Tea": 13,
       "🧇 Mini Waffle Sticks": 10,
       "🧀 Cheese Capy-Puffs": 9,
@@ -172,46 +172,72 @@ export default async function handler(req, res) {
     // * Calculates the total price
     const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     // * Map the items with the corresponding name and quantity
-    const cartItems = cart.map(item => `${item.name} (x${item.quantity} - ${item.price * item.quantity} AED`);
+    const cartItems = cart.map(item => `${item.name} x${item.quantity} - ${item.price * item.quantity} AED`);
 
-    payload = {
-      richContent: [
-        [
-          {
-            type: "info",
-            title: `${menuItem} has been added to your cart!`,
-            subtitle: `(x${existingItem?.quantity || 1}) - ${menuPrices[menuItem]} AED`
-          },
-          {
-            type: "divider"
-          },
-          {
-            type: "description",
-            title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: **${totalPrice}**`,
-            text: cartItems
-          },
-          {
-            type: "divider"
-          },
-          {
-            type: "chips",
-            options: [
-              { text: "➕ Add More Items" },
-              { text: "🛒 Checkout" },
-              {
-                text: "Cancel",
-                image: {
-                  src: {
-                    rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
+    if (cart.length > 0) {
+      payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: `${menuItem} has been added to your cart!`,
+              subtitle: `💰 Total Price: ${totalPrice}`
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "description",
+              title: "🛒 Your Cart",
+              text: cartItems
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "chips",
+              options: [
+                { text: "➕ Add More Items" },
+                { text: "🛒 Checkout" },
+                {
+                  text: "Cancel",
+                  image: {
+                    src: {
+                      rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
+                    }
                   }
                 }
-              }
-            ]
-          }
+              ]
+            }
+          ]
         ]
-      ]
-    };
+      };
+    } else {
+      payload = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "🛒 Your cart is empty.",
+              subtitle: "📜 What would you like to order?"
+            },
+            {
+              type: "chips",
+              options: [
+                { text: "🥤 Iced Matcha Latte" },
+                { text: "☕ Capyccino" },
+                { text: "🍌 Cold Brew Banana Twist" },
+                { text: "🧃 Strawberry Yakult Fizz" },
+                { text: "🧋 Brown Boba Milk Tea" },
+                { text: "🧇 Mini Waffle Sticks" },
+                { text: "🧀 Cheese Capy-Puffs" },
+                { text: "🧁 Banana Nut Muffin" }
+              ]
+            }
+          ]
+        ]
+      };
+    }
 
     if (body.queryResult.queryText === "➕ Add More Items") {
       payload = {
