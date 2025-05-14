@@ -227,6 +227,13 @@ export default async function handler(req, res) {
       };
     }
     else {
+      // * Retrieve the cart and total price from OrderProcess' outputContext
+      const cartContext = body.queryResult.outputContexts?.find(ctx =>
+        ctx.name.endsWith('/contexts/orderprocess-followup')
+      );
+
+      // * Get the cart and totalPrice from the context parameters
+      const cart = cartContext?.parameters.cart || [];
       // * Calculates the total price
       const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
