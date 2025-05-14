@@ -274,7 +274,7 @@ export default async function handler(req, res) {
     });
   }
 
-  else if (intentName === "Checkout") {
+  else if (intentName === "OrderConfirm") {
     const outputContexts = body.queryResult.outputContexts || [];
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
 
