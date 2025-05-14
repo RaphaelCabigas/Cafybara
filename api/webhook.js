@@ -161,7 +161,7 @@ export default async function handler(req, res) {
     let titleCondition = "";
     let subtitleCondition = "";
 
-    if (cart.length === 0 || body.queryResult.queryText === "➕ Add More Items") {
+    if (cart.length === 0 || !menuItem || body.queryResult.queryText === "➕ Add More Items") {
       // * Calculates the total price
       const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
