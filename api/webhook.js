@@ -126,14 +126,10 @@ export default async function handler(req, res) {
   }
 
   // ! Order Process Intent
-  if (intentName === "OrderProcess") {
-    // * Get the user's current session
-    const sessionId = body.session.split('/').pop();
-    // * Get the menu iem parameter
-    const menuItem = body.queryResult.parameters["menu-item"];
+  else if (intentName === "OrderProcess") {
+    const intentParams = body.queryResult?.parameters || {};
 
-    // * Initialize the cart
-    let cart = [];
+    const menuItem = intentParams["menu-item"];
 
     // * Menu item prices
     const menuPrices = {
@@ -146,106 +142,7 @@ export default async function handler(req, res) {
       "🧀 Cheese Capy-Puffs": 9,
       "🧁 Banana Nut Muffin": 8
     };
-
-    // * Gets the existing cart from the of this intent
-    // * whenever the user wants to add more items 
-    const context = body.queryResult.outputContexts?.find(ctx =>
-      ctx.name.endsWith('/contexts/orderprocess-followup')
-    );
-
-    // * if the context exists with a cart then update the cart
-    if (context?.parameters?.cart) {
-      cart = context.parameters.cart;
-    }
-
-    let titleCondition = "";
-    let subtitleCondition = "";
-
-    if (menuItem) {
-      // * Checks if the item already exists
-      const existingItem = cart.find(item => item.name === menuItem);
-
-      if (existingItem) {
-        // * increase the quantity by 1
-        existingItem.quantity += 1;
-      } else {
-        // * Add the new item to the cart
-        cart.push({ name: menuItem, quantity: 1, price: menuPrices[menuItem] });
-      }
-
-      // * Calculates the total price
-      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      // * Map the items with the corresponding name and quantity
-      const cartItems = cart.map(item => `${item.name} x${item.quantity} - ${item.price * item.quantity} AED`);
-
-      payload = {
-        richContent: [
-          [
-            {
-              type: "info",
-              title: `${menuItem} has been added to your cart!`,
-              subtitle: `💰 Total Price: ${totalPrice} AED`
-            },
-            {
-              type: "divider"
-            },
-            {
-              type: "description",
-              title: "🛒 Your Cart",
-              text: cartItems
-            },
-            {
-              type: "divider"
-            },
-            {
-              type: "chips",
-              options: [
-                { text: "➕ Add More Items" },
-                { text: "🛒 Checkout" },
-                {
-                  text: "Cancel",
-                  image: {
-                    src: {
-                      rawUrl: "https://api.iconify.design/lets-icons/dell-fill.svg?height=16&color=%23e52121"
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        ],
-        outputContexts: [
-          {
-            name: `projects/cafybara-rjpb/agent/sessions/${sessionId}/contexts/orderprocess-followup`,
-            lifespanCount: 5,
-            parameters: {
-              cart,
-              totalPrice
-            }
-          }
-        ]
-      };
-    }
-    else {
-      // * Retrieve the cart and total price from OrderProcess' outputContext
-      const cartContext = body.queryResult.outputContexts?.find(ctx =>
-        ctx.name.endsWith('/contexts/orderprocess-followup')
-      );
-
-      // * Get the cart and totalPrice from the context parameters
-      const cart = cartContext?.parameters.cart || [];
-      // * Calculates the total price
-      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-      //* Change the payload title depending on the condition
-      titleCondition = cart.length === 0
-        ? "🛒 Your cart is empty."
-        : "What would you want to add more to your cart?";
-
-      subtitleCondition = cart.length === 0 ?
-        "📜 What would you like to order?"
-        : `💰 Total Price: ${totalPrice} AED`;
-
+    if (!menuItem) {
       payload = {
         richContent: [
           [
@@ -260,11 +157,11 @@ export default async function handler(req, res) {
             }
           ]
         ]
-      };
+      }
     }
   }
 
-  if (intentName === "Checkout") {
+  else if (intentName === "Checkout") {
     // * Retrieve the cart and total price from OrderProcess' outputContext
     const cartContext = body.queryResult.outputContexts?.find(ctx =>
       ctx.name.endsWith('/contexts/orderprocess-followup')
