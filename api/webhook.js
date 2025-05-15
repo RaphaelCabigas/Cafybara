@@ -61,8 +61,8 @@ export default async function handler(req, res) {
         [
           {
             type: "image",
-            rawUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F8%2F85%2FCapybara_portrait.jpg&f=1&nofb=1&ipt=88df1e11027b020ce0f58e102d06d3f4f2e4977710dfd0de99da1d2265a474f2",
-            accessibilityText: "Capybara waiting for a table"
+            rawUrl: "https://cafybara.vercel.app/assets/images/confirmation.png",
+            accessibilityText: "Capybara typing on a laptop"
           },
           {
             type: "info",
@@ -179,7 +179,6 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `${menuItem} added to cart!`,
-            subtitle: `💰 Total Price: ${totalPrice} AED`,
           },
           {
             type: "divider"
@@ -188,6 +187,13 @@ export default async function handler(req, res) {
             type: "description",
             title: "🛒 Your Cart",
             text: cartItems
+          },
+          {
+            type: "divider"
+          },
+          {
+            type: "info",
+            title: `💰 Total Price: ${totalPrice} AED`,
           },
           {
             type: "chips",
