@@ -317,7 +317,15 @@ export default async function handler(req, res) {
             options: [
               { text: "➕ Add More Items" },
               {
-                text: "Confirm",
+                text: "Proceed with Pickup",
+                image: {
+                  src: {
+                    rawUrl: "https://api.iconify.design/lets-icons/check-fill.svg?height=16&color=%235cb338"
+                  }
+                }
+              },
+              {
+                text: "Proceed with Delivery",
                 image: {
                   src: {
                     rawUrl: "https://api.iconify.design/lets-icons/check-fill.svg?height=16&color=%235cb338"
