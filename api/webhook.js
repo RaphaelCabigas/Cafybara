@@ -66,7 +66,8 @@ export default async function handler(req, res) {
           },
           {
             type: "info",
-            title: `Kindly confirm that your reservation details are correct.`
+            title: `Reservation Confirmation`,
+            title: `Kindly confirm that your reservation details are correct:`
           },
           {
             type: "divider"
@@ -408,9 +409,14 @@ export default async function handler(req, res) {
       richContent: [
         [
           {
+            "type": "image",
+            "rawUrl": "https://cafybara.vercel.app/assets/images/confirmation.png",
+            "accessibilityText": "Capybara typing on a laptop"
+          },
+          {
             type: "info",
-            title: ` Order Confirmation`,
-            subtitle: "Would you like to proceed and purchase?"
+            title: "Order Confirmation",
+            subtitle: "Would you like to proceed with this purchase?"
           },
           {
             type: "divider"
