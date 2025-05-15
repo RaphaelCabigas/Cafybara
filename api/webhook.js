@@ -245,6 +245,115 @@ export default async function handler(req, res) {
             subtitle: `What would you like to add more? `
           },
           {
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "subtitle": "13 AED",
+            "title": "Capyccino",
+            "text": "A frothy cappuccino with a cute capybara latte art!",
+            "type": "accordion"
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "title": "Strawberry Yakult Fizz",
+            "text": "Refreshing soda with Yakult and sweet strawberry bursts.",
+            "type": "accordion",
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "subtitle": "14 AED"
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "type": "accordion",
+            "subtitle": "15 AED",
+            "title": "Iced Matcha Latte",
+            "text": "Earthy Japanese matcha with creamy milk over ice."
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "title": "Cold Brew Banana Twist",
+            "type": "accordion",
+            "subtitle": "17 AED",
+            "text": "Smooth cold brew coffee with a hint of ripe banana."
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "subtitle": "13 AED",
+            "title": "Brown Boba Milk Tea",
+            "type": "accordion",
+            "text": "Classic milk tea with chewy brown sugar pearls.",
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "accordion",
+            "title": "Mini Waffle Sticks",
+            "text": "Bite-sized waffles served with maple or chocolate dip.",
+            "subtitle": "10 AED",
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "title": "Cheese Capy-Puffs",
+            "type": "accordion",
+            "text": "Fluffy pastry puffs filled with gooey cheese.",
+            "subtitle": "9 AED"
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "subtitle": "8 AED",
+            "title": "Banana Nut Muffin",
+            "image": {
+              "src": {
+                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+              }
+            },
+            "text": "Moist muffin packed with bananas and crunchy walnuts.",
+            "type": "accordion"
+          },
+          {
             type: "chips",
             options: [...Object.keys(menuAvailable).map(item => ({ text: item })),
             { text: "🛒 Checkout" },
