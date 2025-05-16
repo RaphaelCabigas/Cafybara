@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   if (intentName === "ReservationPricing") {
     // * Extract all the parameters from the intent and output used in the intent or just an empty object
     const intentParams = body.queryResult?.parameters || {};
-    const outputContexts = body.queryResult.outputContexts || [];
+    const outputContexts = body.queryResult.outputContexts;
 
     // * Find the following context for the previous intent
     const context = outputContexts.find(ctx =>
@@ -146,12 +146,12 @@ export default async function handler(req, res) {
   // ! Order Process Intent
   else if (intentName === "OrderProcess") {
     const intentParams = body.queryResult?.parameters || {};
-    const outputContexts = body.queryResult.outputContexts || [];
+    const outputContexts = body.queryResult.outputContexts;
 
     const menuItem = intentParams["menu-item"];
 
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
-    let cart = context?.parameters?.cart || [];
+    let cart = context?.parameters?.cart;
 
     const existingItem = cart.find(item => item.name === menuItem);
     if (existingItem) {
@@ -217,11 +217,11 @@ export default async function handler(req, res) {
   }
   // ! Add More Menu Items Intent
   else if (intentName === "OrderAddMore") {
-    const outputContexts = body.queryResult.outputContexts || [];
+    const outputContexts = body.queryResult.outputContexts;
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
 
     // * Get the cart and totalPrice from the context parameters
-    const cart = context?.parameters.cart || [];
+    const cart = context?.parameters.cart;
 
     const payload = {
       richContent: [
@@ -373,11 +373,11 @@ export default async function handler(req, res) {
   }
 
   else if (intentName === "OrderConfirm") {
-    const outputContexts = body.queryResult.outputContexts || [];
+    const outputContexts = body.queryResult.outputContexts;
     const context = outputContexts.find(ctx => ctx.name.endsWith('/contexts/order-followup'));
 
     // * Get the cart and totalPrice from the context parameters
-    const cart = context?.parameters.cart || [];
+    const cart = context?.parameters.cart;
 
     // * Calculate total price
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
