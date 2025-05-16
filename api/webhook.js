@@ -166,9 +166,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // * Calculate total price
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     // * Format cart items into readable lines
     const cartItems = cart.map(item =>
       `${item.name} (x${item.quantity}) - ${item.price * item.quantity} AED`
@@ -188,13 +185,6 @@ export default async function handler(req, res) {
             type: "description",
             title: "🛒 Your Cart",
             text: cartItems
-          },
-          {
-            type: "divider"
-          },
-          {
-            type: "info",
-            title: `💰 Total Price: ${totalPrice} AED`,
           },
           {
             type: "chips",
