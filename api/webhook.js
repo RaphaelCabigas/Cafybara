@@ -233,28 +233,20 @@ export default async function handler(req, res) {
     // * Get the cart and totalPrice from the context parameters
     const cart = context?.parameters.cart || [];
 
-    // * Calculate total price
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     const payload = {
       richContent: [
         [
           {
             type: "info",
-            title: "🛒 Your Cart",
-            subtitle: `💰 Total Price: ${totalPrice} AED `
+            subtitle: `What would you like to add more? `
           },
           {
             type: "divider"
           },
           {
-            type: "info",
-            subtitle: `What would you like to add more? `
-          },
-          {
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/capyccino.png"
               }
             },
             "subtitle": "13 AED",
@@ -271,7 +263,7 @@ export default async function handler(req, res) {
             "type": "accordion",
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/yakult.png"
               }
             },
             "subtitle": "14 AED"
@@ -282,7 +274,7 @@ export default async function handler(req, res) {
           {
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/matcha.png"
               }
             },
             "type": "accordion",
@@ -296,7 +288,7 @@ export default async function handler(req, res) {
           {
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/banana.png"
               }
             },
             "title": "Cold Brew Banana Twist",
@@ -314,7 +306,7 @@ export default async function handler(req, res) {
             "text": "Classic milk tea with chewy brown sugar pearls.",
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/milktea.png"
               }
             }
           },
@@ -328,7 +320,7 @@ export default async function handler(req, res) {
             "subtitle": "10 AED",
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/wafflesticks.png"
               }
             }
           },
@@ -338,7 +330,7 @@ export default async function handler(req, res) {
           {
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/puffs.png"
               }
             },
             "title": "Cheese Capy-Puffs",
@@ -354,7 +346,7 @@ export default async function handler(req, res) {
             "title": "Banana Nut Muffin",
             "image": {
               "src": {
-                "rawUrl": "https://cafybara.vercel.app/assets/icons/chat-icon.png"
+                "rawUrl": "https://cafybara.vercel.app/assets/images/muffin.png"
               }
             },
             "text": "Moist muffin packed with bananas and crunchy walnuts.",
