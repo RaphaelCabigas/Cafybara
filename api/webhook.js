@@ -67,7 +67,7 @@ export default async function handler(req, res) {
           {
             type: "info",
             title: `Reservation Confirmation`,
-            title: `Kindly confirm that your reservation details are correct:`
+            subtitle: `Kindly confirm that your reservation details are correct:`
           },
           {
             type: "divider"
